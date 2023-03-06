@@ -78,4 +78,4 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status);
 	
 	and return the code of the error in case of error, return
 	SUCC otherwise.																*/
-/*int pass2(string path, int status, table tab, word *memhead);*/
+int pass2(char *path, int status, lblword *headOfLbl, word *head);
