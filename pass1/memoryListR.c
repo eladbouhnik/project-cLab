@@ -120,7 +120,7 @@ int printMemList(FILE *fp, word *head, int num1, int num2){
 	
 	
 	/* write to the file coded numbers */
-  fprintf(fp,"\t\t%d\t%d",num1,num2);
+  	fprintf(fp,"\t\t%d\t%d",num1,num2);
 	
 	
 	/* scan the list */
@@ -173,7 +173,8 @@ int printLblList(FILE *fp, lblword * head){
 		/* if it's not the first line, seperate the new line from the previous one */
 		if (firstline){
 			firstline = !firstline; /* turn off the flag */
-		} else {
+		}
+		else {
 			writeline(fp, ESTR); /* seperate the lines */
 		}
 		
