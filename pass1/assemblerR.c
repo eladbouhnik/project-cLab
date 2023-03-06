@@ -1,5 +1,7 @@
 
 
+
+
 #include <stdio.h>
 #include "assemblerR.h"
 #include "error.h"
@@ -33,9 +35,9 @@ FILE *p ,*p1;
 								printLblList(p1,headOfLbl->next);
 
 		/* perform the second pass on the pre-compiled file and check for fatal errors */
-		/*if ((status = pass2(argv[argc], status, headOfLbl, memhead)) == ERR_MEM || status == ERR_FOE || status == ERR_PRINT || status == ERR_FCE){
+		if ((status = pass2(argv[argc], status, headOfLbl, memhead)) == ERR_MEM || status == ERR_FOE || status == ERR_PRINT || status == ERR_FCE){
 			return status;
-		}*/
+		}
 		
 		if (status == SUCC){
 			printf("------------- Compiled \"%s\" successfully -------------\n\n", argv[argc]);
