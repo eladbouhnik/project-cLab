@@ -7,15 +7,15 @@
 #include "ioR.h"
 
 int addMcr(struct macro *head,char *name,char *content){
-     char *cpyName, *cpyContent;
-     newMacro *current = head;
-    while (current->next != NULL) {
-        current = current->next;
+	char *cpyName, *cpyContent;
+	newMacro *current = head;
+	while (current->next != NULL) {
+        	current = current->next;
     }
     
-    current->next = (newMacro *) malloc(sizeof(newMacro)); /*need to check allocation*/
-    if(current->next==NULL)
-    	return ERR_MEM;
+	current->next = (newMacro *) malloc(sizeof(newMacro)); /*need to check allocation*/
+	if(current->next==NULL)
+    		return ERR_MEM;
     
     /* duplicate the given name and content */
 	if ((cpyName = duplstr(name)) == NULL || (cpyContent = duplstr(content)) == NULL){
@@ -23,14 +23,14 @@ int addMcr(struct macro *head,char *name,char *content){
 		free(cpyContent);
 		return ERR_MEM;
 	}
-    current->next->name = cpyName;
-    current->next->content = cpyContent;
-    current->next->next = NULL;
+	current->next->name = cpyName;
+	current->next->content = cpyContent;
+	current->next->next = NULL;
     
     	
 
 
-    return SUCC;
+	return SUCC;
 }
 
 
@@ -118,13 +118,13 @@ char *ismacrodec(struct macro *head, char *str){
 
 
 void freeList(struct macro *head){
-		newMacro *ptr = head; /* pointer to the current list */
-		newMacro *temp;
-		/* scan the current list and free each node */
-		while (ptr != NULL){
-		    temp = ptr->next; /* save the next node */
-			free(ptr);
-			ptr = temp; /* continue to the next node */
-		}
+	newMacro *ptr = head; /* pointer to the current list */
+	newMacro *temp;
+	/* scan the current list and free each node */
+	while (ptr != NULL){
+		temp = ptr->next; /* save the next node */
+		free(ptr);
+		ptr = temp; /* continue to the next node */
+	}
 		
 }
