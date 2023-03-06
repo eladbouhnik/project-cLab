@@ -5,35 +5,34 @@
 #include "macroTable.h"
 #include "ioR.h"
 
- 	int preAsm(char *path){/*need to change- to get more then on files in assembler.c*/
- 		FILE *source , *target; /* the source (.as) and target (.am) files */
- 		char *nameOfFile= path;
- 		char *newString;
- 		char *line;
- 		int len; /* the length of the line */
-		int ln = 0; /*line number*/
-		char lc = '\n'; /* the last character in the line */
-		char plc; /* the last character of the previous line */
-		int status = SUCC; /* flag to remember if found error */
+int preAsm(char *path){/*need to change- to get more then on files in assembler.c*/
+	FILE *source , *target; /* the source (.as) and target (.am) files */
+ 	char *nameOfFile= path;
+	char *newString;
+ 	char *line;
+	int len; /* the length of the line */
+	int ln = 0; /*line number*/
+	char lc = '\n'; /* the last character in the line */
+	char plc; /* the last character of the previous line */
+	int status = SUCC; /* flag to remember if found error */
 		
-		newMacro *head = NULL; /*build the first node in the linked list*/
-		head = (newMacro *) malloc(sizeof(newMacro));
-		if(head==NULL){
-		    report(ERR_MEM, ln);
+	newMacro *head = NULL; /*build the first node in the linked list*/
+	head = (newMacro *) malloc(sizeof(newMacro));
+	if(head==NULL){
+		report(ERR_MEM, ln);
 	        return ERR_MEM;
 		}
-		head->name = "null";
-		head->content = "null";
-		
-		if ((newString = addstr(nameOfFile, ".as")) == NULL){ /* adds the extension of the input file */
-			report(ERR_MEM, ln);
-			return ERR_MEM;
-		}
- 		if((source = fopen(newString,"r"))== NULL){ /* open the input file on read mode */
- 			free(newString);
-			report(ERR_FOE, ln);
-			return ERR_FOE;
-		}
+	head->name = "null";
+	head->content = "null";
+	if ((newString = addstr(nameOfFile, ".as")) == NULL){ /* adds the extension of the input file */
+		report(ERR_MEM, ln);
+		return ERR_MEM;
+	}
+ 	if((source = fopen(newString,"r"))== NULL){ /* open the input file on read mode */
+ 		free(newString);
+		report(ERR_FOE, ln);
+		return ERR_FOE;
+	}
 		free(newString);
  	
  		/* adds the extension of the output file */
@@ -81,7 +80,8 @@
 					report(ERR_PRINT, ln);
 					return ERR_PRINT;
 				}
-			} else { /* not a macro or a refference to a macro */
+			}
+			else { /* not a macro or a refference to a macro */
 				if(writeline(target, line) == ERR_PRINT){/*couldn't print to the file*/
 					fclose(source);
 					fclose(target);
