@@ -34,6 +34,7 @@
 #define DEFK 0 /* the default kind of information */
 #define EXTADR "0000000001" /* the address given to external labels */
 #define NOTFOUND -1 /* "getking" return this value if couldn't find label */
+
 /* to set the ARE bits of a string representing a memory word */
 #define __A 0 /* the memory word is absoulte */
 #define __E 1 /* the memory word is external */
@@ -86,13 +87,13 @@ lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind);
 /*	search in the table for the content with a name matching
 	key, and return the content.
 	if couldn't find anything, return NULL.				*/
-char *getcontentLbl(struct lblword *head, char *nameOflbl);
+char *getcontentLbl(lblword *head, char *nameOflbl);
+
 
 /*	search in the table for the kind with a name matching
 	key, and return the kind.
 	if couldn't find anything, return NULL.				*/
 int getkindLbl(lblword *headOfLbl, char *nameOfLbl);
-
 
 /*	free the memory held by the given list.	*/
 void freeMemList(word * head);
