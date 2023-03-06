@@ -78,6 +78,17 @@ char *getcontentLbl(struct lblword *head, char *nameOflbl){
 	return ptr == NULL ? NULL : ptr->data;
 }
 
+int getkindLbl(lblword *headOfLbl, char *nameOfLbl){
+	
+	lblword *ptr; /* pointer to scan the linked list */
+	
+	/* scan the list untill ptr is NULL or untill a node with the same kind is found */
+	for (	ptr = ptr->next	;	ptr != NULL && strcmp(ptr->name, nameOfLbl)	;	ptr = ptr->next);
+	
+	/* return NOTFOUND if the node wasn't found. otherwise, return the kind */
+	return ptr == NULL ? NOTFOUND : ptr->kind;
+}
+
 void freeMemList(word * head){
 	word * tmp; /* node to remember the next node */
 	
