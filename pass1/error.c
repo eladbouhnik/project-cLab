@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "error.h"
-
 #include "ioR.h"
 
 
@@ -9,7 +8,8 @@ void report(int error, int line) {
 	/* check if it is a fatal error (general error)*/
 	if (error == ERR_MEM || error == ERR_FOE || error == ERR_PRINT || error == ERR_FCE){
 		printf("Fatal error: ");
-	} else { /* error in the code provided by the user */
+	}
+	else { /* error in the code provided by the user */
 		printf("Error in line %3d: ", line);
 	}
 	
