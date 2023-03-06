@@ -10,26 +10,26 @@ guide guids[] =	{
 					
 				};
 				
-				instruct insts[] =	{
-						{"add"	,2,	A0+A1+A3	,	A1+A3	, AN},
-						{"bne"	,10,	AN	,	A1+A2	, A0+A1+A3 },
-						{"clr"	,5,	AN	,	A1+A3	, AN},
-						{"cmp"	,	1	,	A0+A1+A3	,	A0+A1+A3, AN},
-						{"dec"	,	8	,	AN			,	A1+A3	, AN},
-						{"inc"	,7,	AN	,	A1+A3	, AN},
-						{"jmp"	,9,	AN	,	A1+A2	,A0+A1+A3}, 
-						{"jsr"	,13,	AN	,	A1+A2	,A0+A1+A3}, 
-						{"lea"	,6,	A1	,	A1+A3	, AN},
-						{"mov"	,	0	,	A0+A1+A3	,	A1+A3	, AN},
-						{"not"	,	4	,	AN	,	A1+A3	, AN},
-						{"prn"	,	12	,	AN	,	A0+A1+A3	, AN},
-						{"red"	,11,	AN	,	A1+A3	, AN},
-						{"rts"	,14	,	AN	,	AN	, AN},
-						{"stop"	,15,	AN	,	AN	, AN},
-						{"sub"	,3,	A0+A1+A3	,	A1+A3	, AN}
+instruct insts[] =	{
+					{"add"	,2,	A0+A1+A3	,	A1+A3	, AN},
+					{"bne"	,10,	AN	,	A1+A2	, A0+A1+A3 },
+					{"clr"	,5,	AN	,	A1+A3	, AN},
+					{"cmp"	,	1	,	A0+A1+A3	,	A0+A1+A3, AN},
+					{"dec"	,	8	,	AN			,	A1+A3	, AN},
+					{"inc"	,7,	AN	,	A1+A3	, AN},
+					{"jmp"	,9,	AN	,	A1+A2	,A0+A1+A3}, 
+					{"jsr"	,13,	AN	,	A1+A2	,A0+A1+A3}, 
+					{"lea"	,6,	A1	,	A1+A3	, AN},
+					{"mov"	,	0	,	A0+A1+A3	,	A1+A3	, AN},
+					{"not"	,	4	,	AN	,	A1+A3	, AN},
+					{"prn"	,	12	,	AN	,	A0+A1+A3	, AN},
+					{"red"	,11,	AN	,	A1+A3	, AN},
+					{"rts"	,14	,	AN	,	AN	, AN},
+					{"stop"	,15,	AN	,	AN	, AN},
+					{"sub"	,3,	A0+A1+A3	,	A1+A3	, AN}
 					
-					};
+			};
 					
 					
-					/* array of the registers' names (string is defiend in "io.h") */
-		char *regs[] = {"r0","r1","r2","r3","r4","r5","r6","r7"};
+/* array of the registers' names (string is defiend in "io.h") */
+char *regs[] = {"r0","r1","r2","r3","r4","r5","r6","r7"};
