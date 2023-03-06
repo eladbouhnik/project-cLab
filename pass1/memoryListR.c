@@ -66,7 +66,7 @@ lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind){
 	return newword;
 }
 
-char *getcontentLbl(struct lblword *head, char *nameOflbl){
+char *getcontentLbl(lblword *head, char *nameOflbl){
 	
 	lblword *ptr = head; /* pointer to scan the linked list */
 		
@@ -78,9 +78,10 @@ char *getcontentLbl(struct lblword *head, char *nameOflbl){
 	return ptr == NULL ? NULL : ptr->data;
 }
 
+
 int getkindLbl(lblword *headOfLbl, char *nameOfLbl){
 	
-	lblword *ptr; /* pointer to scan the linked list */
+	lblword *ptr= headOfLbl; /* pointer to scan the linked list */
 	
 	/* scan the list untill ptr is NULL or untill a node with the same kind is found */
 	for (	ptr = ptr->next	;	ptr != NULL && strcmp(ptr->name, nameOfLbl)	;	ptr = ptr->next);
@@ -88,6 +89,7 @@ int getkindLbl(lblword *headOfLbl, char *nameOfLbl){
 	/* return NOTFOUND if the node wasn't found. otherwise, return the kind */
 	return ptr == NULL ? NOTFOUND : ptr->kind;
 }
+
 
 void freeMemList(word * head){
 	word * tmp; /* node to remember the next node */
@@ -131,7 +133,7 @@ int printMemList(FILE *fp, word *head, int num1, int num2){
 	
 	
 	/* write to the file coded numbers */
-  	fprintf(fp,"\t\t%d\t%d",num1,num2);
+  fprintf(fp,"\t\t%d\t%d",num1,num2);
 	
 	
 	/* scan the list */
@@ -184,8 +186,7 @@ int printLblList(FILE *fp, lblword * head){
 		/* if it's not the first line, seperate the new line from the previous one */
 		if (firstline){
 			firstline = !firstline; /* turn off the flag */
-		}
-		else {
+		} else {
 			writeline(fp, ESTR); /* seperate the lines */
 		}
 		
@@ -201,6 +202,9 @@ int printLblList(FILE *fp, lblword * head){
 	
 	return SUCC;
 }
+
+
+
 
 
 
