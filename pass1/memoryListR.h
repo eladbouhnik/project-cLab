@@ -88,6 +88,11 @@ lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind);
 	if couldn't find anything, return NULL.				*/
 char *getcontentLbl(struct lblword *head, char *nameOflbl);
 
+/*	search in the table for the kind with a name matching
+	key, and return the kind.
+	if couldn't find anything, return NULL.				*/
+int getkindLbl(lblword *headOfLbl, char *nameOfLbl);
+
 
 /*	free the memory held by the given list.	*/
 void freeMemList(word * head);
