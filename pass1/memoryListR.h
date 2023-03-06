@@ -106,7 +106,7 @@ void freeLblList(lblword * head);
 		.
 		MEM_STRT+n	node_n.data
 	
-	everything is printed in base 32.
+	everything is printed in base 2.
 	assume the nodes' data is of length WORDSIZE
 	and is a binary representation.
 	
