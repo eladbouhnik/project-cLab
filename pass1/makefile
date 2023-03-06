@@ -2,8 +2,8 @@ flags = -Wall -ansi -pedantic -g
 
 all: assembler
 
-assembler: assemblerR.o guidesR.o ioR.o pass1R.o  preAsm.o supfuncsR.o  error.o memoryListR.o instructR.o macroTable.o globalsR.o
-	gcc $(flags) assemblerR.o guidesR.o ioR.o pass1R.o preAsm.o supfuncsR.o  error.o memoryListR.o  instructR.o macroTable.o globalsR.o -o assembler
+assembler: assemblerR.o guidesR.o ioR.o pass1R.o pass2R.o  preAsm.o supfuncsR.o  error.o memoryListR.o instructR.o macroTable.o globalsR.o
+	gcc $(flags) assemblerR.o guidesR.o ioR.o pass1R.o pass2R.o preAsm.o supfuncsR.o  error.o memoryListR.o  instructR.o macroTable.o globalsR.o -o assembler
 	
 assemblerR.o: assemblerR.c assemblerR.h error.h
 	gcc $(flags) -c assemblerR.c -o assemblerR.o
@@ -17,6 +17,8 @@ ioR.o: ioR.c ioR.h error.h
 pass1R.o: pass1R.c  ioR.h memoryListR.h error.h guidesR.h supfuncsR.h instructR.h
 	gcc $(flags) -c pass1R.c -o pass1R.o
 	
+pass2R.o: pass2R.c pass2R.h ioR.h memoryListR.h error.h guidesR.h supfuncsR.h instructR.h
+	gcc $(flags) -c pass2R.c -o pass2R.o
 preAsm.o: preAsm.c  preAsm.h macroTable.h ioR.h supfuncsR.h  error.h
 	gcc $(flags) -c preAsm.c -o preAsm.o
 	
@@ -42,4 +44,5 @@ globalsR.o: globalsR.c instructR.h guidesR.h
 
 clean:
 	rm *.o
+
 
