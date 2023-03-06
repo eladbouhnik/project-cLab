@@ -231,7 +231,8 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 					
 					datanode = temp; /* change to the new node */
 					DC++;
-				} else if (op->deftype == STRTYP || (op->deftype == GNDEF && op->optypes[i] == STRTYP)){ /* check if the operand should be a string */
+					} 
+					else if (op->deftype == STRTYP || (op->deftype == GNDEF && op->optypes[i] == STRTYP)){ /* check if the operand should be a string */
 					char *ptr; /* pointer to scan the string */
 					
 					/* check if the first character is QUM */
@@ -359,7 +360,8 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 				}
 				lblNode = lblTemp;
 			}
-		} else { /* instruction */
+		} 
+		else { /* instruction */
 			instruct *op = (instruct*)opr; /* cast opr to (instruct *) */
 			char *opword; /* the memory word of the operation */
 			word *temp; /* temporary word for the "addnext" */
