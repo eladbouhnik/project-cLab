@@ -27,6 +27,8 @@
 #define ADSLEN	2	/* the length of the addressings in binary */
 #define ADSTGST	2	/* the starting position of the target addressing */
 #define ADSSCST	4	/* the starting position of the source addressing */
+#define ADS_PARAM1_ST	12	/* the starting position of the first parameter addressing */
+#define ADS_PARAM2_ST	10	/* the starting position of the first parameter addressing */
 #define REGLEN	6	/* the length of register */
 #define REGTGST	2	/* the starting position of the target register */
 #define REGSCST	8	/* the starting position of the source register */
