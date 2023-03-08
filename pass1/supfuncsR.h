@@ -1,4 +1,5 @@
 
+
 #include <stdio.h>
 
 
@@ -131,7 +132,11 @@ char *islbl (char *line);
 int powr(int x, int y);
 
 
-int removeWhiteSpace (char str[]);
+
+char** getParams(char *str);
+
+
+int removeWhiteSpace (char *str);
 
 
 /*	convert string that represent binary number to special base 2.
@@ -154,6 +159,7 @@ void freeall (void * ptr, ...);
 	return SUCC if succeded to close all
 	and ERR_FCE if couldn't. 			*/
 int fcloseall (FILE * ptr, ...);
+void freeallLbl(void ***ptr, ...);
 
 
 
