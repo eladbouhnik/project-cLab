@@ -117,7 +117,6 @@ void freeLblList(lblword * head){
 		
 		freeall(head -> name, head->data, NULL);
 		free(head);
-		
 		head = tmp; /* continue to the next node */
 	}
 	
@@ -130,17 +129,13 @@ int printMemList(FILE *fp, word *head, int num1, int num2){
 	int memc = MEM_STRT; /* memmory counter */
 	char adrStr[4]; /* the string of the address*/
 	
-
-	
-	
 	/* write to the file coded numbers */
-  fprintf(fp,"\t\t%d\t%d",num1,num2);
+	fprintf(fp,"\t\t%d\t%d",num1,num2);
 	
 	
 	/* scan the list */
 	while (head != NULL) {
-		char *adrs2, *data2; /* the data needed to be printed */
-		
+		char *adrs2, *data2; /* the data needed to be printed */	
 		sprintf(adrStr,"%d",memc++);
 		
 		/* convert to special base 2 */
