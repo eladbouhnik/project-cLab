@@ -126,7 +126,7 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 			
 		}
 		
-		
+
 		/* check for allocation guide (for example ".data") */
 		if (typ == GTYP && (((guide *) opr)->kind & GALL)){
 			guide *op = (guide *) opr; /* cast opr to (guide *) */
@@ -231,11 +231,11 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 					
 					datanode = temp; /* change to the new node */
 					DC++;
-					} 
-					else if (op->deftype == STRTYP || (op->deftype == GNDEF && op->optypes[i] == STRTYP)){ /* check if the operand should be a string */
+				} else if (op->deftype == STRTYP || (op->deftype == GNDEF && op->optypes[i] == STRTYP)){ /* check if the operand should be a string */
 					char *ptr; /* pointer to scan the string */
-					
 					/* check if the first character is QUM */
+					
+
 					if (*args[i] != QUM){
 						report(status = ERR_OPD, ln);
 						continue;  /* continue to the next line */
@@ -360,8 +360,7 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 				}
 				lblNode = lblTemp;
 			}
-		} 
-		else { /* instruction */
+		} else { /* instruction */
 			instruct *op = (instruct*)opr; /* cast opr to (instruct *) */
 			char *opword; /* the memory word of the operation */
 			word *temp; /* temporary word for the "addnext" */
@@ -559,6 +558,10 @@ int pass1R(char *path, lblword **headOfLbl, word **memhead, int status){
 	return status;
 	}
 	
+	
+
+
+
 	
 
 
