@@ -125,6 +125,7 @@ void freeLblList(lblword * head){
 }
 
 
+
 int printMemList(FILE *fp, word *head, int num1, int num2){
 	int memc = MEM_STRT; /* memmory counter */
 	char adrStr[4]; /* the string of the address*/
@@ -202,6 +203,10 @@ int printLblList(FILE *fp, lblword * head){
 	
 	return SUCC;
 }
+
+
+
+
 
 
 
