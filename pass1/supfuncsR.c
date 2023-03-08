@@ -264,9 +264,11 @@ char *isreg(char *str){
 		
 		if (cmp < 0){
 			high = mid - 1;
-		} else if (0 < cmp){
+		} 
+		else if (0 < cmp){
 			low = mid + 1;
-		} else {
+		}
+		else {
 			reg = regs[mid];
 		}
 	}
@@ -300,7 +302,8 @@ char *itostr(int num){
 			if (gbw(numstr, i) == '1'){
 				gbw(numstr, i) = '0';
 				carry = 1;
-			} else { /* gbw(numstr, i) == '0' */
+			}
+			else { /* gbw(numstr, i) == '0' */
 				gbw(numstr, i) = '1';
 				carry = 0;
 			}
@@ -596,29 +599,28 @@ int powr(int x, int y){
 }
 
 char** getParams(char* str) {
-    char** params; 
-    char* start;
-    char* end; 
-    char *copy;
-    copy = (char*) malloc(sizeof(char)*(strlen(str)+1)); /* allocate memory for a copy of the string*/
-    strcpy(copy,str);
-    removeWhiteSpace(copy);
-   params = (char**) malloc(sizeof(char*)*2); /* allocate memory for two strings*/
-    start = strchr(copy, '('); /* find the opening parenthesis*/
-    end = strchr(copy, ')'); /*find the closing parenthesis*/
-    if (start && end) {
+	char** params; 
+	char* start; char* end;
+	char *copy;
+	copy = (char*) malloc(sizeof(char)*(strlen(str)+1)); /* allocate memory for a copy of the string*/
+	strcpy(copy,str);
+	removeWhiteSpace(copy);
+	params = (char**) malloc(sizeof(char*)*2); /* allocate memory for two strings*/
+	start = strchr(copy, '('); /* find the opening parenthesis*/
+	end = strchr(copy, ')'); /*find the closing parenthesis*/
+	if (start && end) {
     		char* comma ;
-        start++; /* advance the start pointer past the opening parenthesis*/
-        *end = '\0'; /*replace the closing parenthesis with a null character to terminate the string*/
-        comma = strchr(start, ','); /* find the comma delimiter*/
-        if (comma) {
-            *comma = '\0'; /*replace the comma with a null character to terminate the first string*/
-            params[0] = (char*) malloc(sizeof(char)*(strlen(start)+1)); /* allocate memory for the first string*/
-            strcpy(params[0], start); /* copy the first string to the allocated memory*/
-            comma++; /* advance the comma pointer past the null character*/
-            params[1] = (char*) malloc(sizeof(char)*(strlen(comma)+1)); /* allocate memory for the second string*/
-            strcpy(params[1], comma); /* copy the second string to the allocated memory*/
-        }
+        	start++; /* advance the start pointer past the opening parenthesis*/
+        	*end = '\0'; /*replace the closing parenthesis with a null character to terminate the string*/
+        	comma = strchr(start, ','); /* find the comma delimiter*/
+        	if (comma) {
+           		 *comma = '\0'; /*replace the comma with a null character to terminate the first string*/
+            		params[0] = (char*) malloc(sizeof(char)*(strlen(start)+1)); /* allocate memory for the first string*/
+          		  strcpy(params[0], start); /* copy the first string to the allocated memory*/
+           		 comma++; /* advance the comma pointer past the null character*/
+           		 params[1] = (char*) malloc(sizeof(char)*(strlen(comma)+1)); /* allocate memory for the second string*/
+           		 strcpy(params[1], comma); /* copy the second string to the allocated memory*/
+        }	
     }
     return params; /* return the array of strings*/
 }
@@ -634,4 +636,5 @@ int removeWhiteSpace (char *str){
 		  }
 		return 1;
   }
+
 
