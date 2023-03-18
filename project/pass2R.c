@@ -13,6 +13,7 @@
 int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	FILE *source, *obj, *ent, *ext; /* pointers to source file and destination files */
 	char lc = NLN; /* the last character of the current file */
+	char *fullName;
 	char plc; /* the previous last character*/
 	char *line; /* current line */
 	int ln = 0; /* line counter */
@@ -37,7 +38,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	}
 	
 	/* create the name of the source file */
-	if ((nameOfFile = addstr(nameOfFile, EAM)) == NULL){
+	if ((fullName = addstr(nameOfFile, EAM)) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
 		freeMemList(head);
@@ -47,17 +48,17 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	}
 	
 	/* open the source file */
-	if ((source = fopen(nameOfFile,"r")) == NULL){
+	if ((source = fopen(fullName,"r")) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
 		freeMemList(head);
 		freeLblList(headOfLbl);
-		free(nameOfFile);
+		free(fullName);
 		report(ERR_FOE, ln);
 		return ERR_FOE;
 	}
 	
-	free(nameOfFile);
+	free(fullName);
 
 	/* scan the file's lines */
 	while ((plc = lc) != EOF && (line = readline(source, &lc, NULL)) != NULL){ /* read line from source file */
@@ -1131,7 +1132,7 @@ freeLblList(headOfLbl);
 	
 
 	/* the name of the object file */
-	if ((nameOfFile = addstr(nameOfFile, EOB)) == NULL){
+	if ((fullName = addstr(nameOfFile, EOB)) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
 		freeMemList(head);
@@ -1140,16 +1141,16 @@ freeLblList(headOfLbl);
 	}
 	
 	/* create\open the object file */
-	if ((obj = fopen(nameOfFile,"w")) == NULL){
+	if ((obj = fopen(fullName,"w")) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
 		freeMemList(head);
-		free(nameOfFile);
+		free(fullName);
 		report(ERR_FOE, ln);
 		return ERR_FOE;
 	}
 	
-	free(nameOfFile);
+	free(fullName);
 	
 	/* print the memory list to the object file */
 	if ((res = printMemList(obj, head, ic, dc)) != SUCC){
@@ -1174,7 +1175,7 @@ freeLblList(headOfLbl);
 	
 	if(countNodes(enthead)>1){
 	/* the name of the entry file */
-	if ((nameOfFile = addstr(nameOfFile, ENT)) == NULL){
+	if ((fullName = addstr(nameOfFile, ENT)) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
 		report(ERR_MEM ,ln);
@@ -1182,15 +1183,15 @@ freeLblList(headOfLbl);
 	}
 	
 	/* open\create the entry file */
-	if ((ent = fopen(nameOfFile,"w")) == NULL){
+	if ((ent = fopen(fullName,"w")) == NULL){
 		freeLblList(enthead);
 		freeLblList(exthead);
-		free(nameOfFile);
+		free(fullName);
 		report(ERR_FOE, ln);
 		return ERR_FOE;
 	}
 	
-	free(nameOfFile);
+	free(fullName);
 	/* print the entry list to the entry file (enthead->next  to skip the dummy head) */
 	if((res = printLblList(ent, enthead->next)) != SUCC){
 		freeLblList(enthead);
@@ -1212,21 +1213,21 @@ freeLblList(headOfLbl);
 
 	if(countNodes(exthead)>1){
 	/* the name of the extern file */
-	if ((nameOfFile = addstr(nameOfFile, EXT)) == NULL){
+	if ((fullName = addstr(nameOfFile, EXT)) == NULL){
 		freeLblList(exthead);
 		report(ERR_MEM ,ln);
 		return ERR_MEM;
 	}
 	
 	/* open\create the extern file */
-	if ((ext = fopen(nameOfFile,"w")) == NULL){
-		free(nameOfFile);
+	if ((ext = fopen(fullName,"w")) == NULL){
+		free(fullName);
 		freeLblList(exthead);
 		report(ERR_FOE, ln);
 		return ERR_FOE;
 	}
 	
-	free(nameOfFile);
+	free(fullName);
 	
 	/* print the extern list to the extern file (exthead->next  to skip the dummy head) */
 	if ((res = printLblList(ext, exthead->next)) != SUCC) {
