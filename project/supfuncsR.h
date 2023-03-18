@@ -162,5 +162,4 @@ void freeall (void * ptr, ...);
 	return SUCC if succeded to close all
 	and ERR_FCE if couldn't. 			*/
 int fcloseall (FILE * ptr, ...);
-void freeallLbl(void ***ptr, ...);
 
