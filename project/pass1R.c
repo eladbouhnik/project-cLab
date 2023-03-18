@@ -17,6 +17,7 @@ int pass1R(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	char *line; /* the current line */
 	int ln = 0; /* count lines */
 	char lc = NLN; /* the last character in the current line */
+	char *fullName;
 	char plc; /* the last character of the previous line */ 
 	FILE *source; /* the source file */
 	lblword *lblTemp, *lblNode; /* temp lblword for "addnextlbl" */
@@ -28,11 +29,11 @@ int pass1R(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	
 	*headOfLbl = (lblNode = addnextlbl(NULL,"head", "null", 0)); /* table of labels - creating head*/
 	ptr=*headOfLbl;
-	nameOfFile = addstr(nameOfFile, EAM); /* the name of the source file */
+	fullName = addstr(nameOfFile, EAM); /* the name of the source file */
 	
 	/* check allocations */
-	if (*headOfLbl == NULL || *memhead == NULL || datahead == NULL || nameOfFile == NULL){
-		free(nameOfFile);
+	if (*headOfLbl == NULL || *memhead == NULL || datahead == NULL || fullName == NULL){
+		free(fullName);
 		freeLblList(*headOfLbl); 
 		freeMemList(*memhead);
 		freeMemList(datahead);
@@ -41,8 +42,8 @@ int pass1R(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	}
 	
 	/* open the source file */
-	if ((source = fopen(nameOfFile,"r")) == NULL){
-		free(nameOfFile);
+	if ((source = fopen(fullName,"r")) == NULL){
+		free(fullName);
 		freeLblList(*headOfLbl); 
 		freeMemList(*memhead);
 		freeMemList(datahead);
@@ -50,7 +51,7 @@ int pass1R(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 		return ERR_FOE;
 	}
 	
-	free(nameOfFile);
+	free(fullName);
 	
 	/* scan the lines of the source file */
 	while ((plc = lc) != EOF && (line = readline(source, &lc, NULL)) != NULL){
@@ -552,6 +553,5 @@ int pass1R(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	}
 	
 	
-
 
 
