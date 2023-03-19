@@ -1,5 +1,5 @@
 /* this program compile ".as" files and writes to the standard output
-	the errors if there are any.
+	the errors if there are errors.
 	
 	the errors that are reported, reffering to lines in the created ".am" file (unless written otherwise).
 	
