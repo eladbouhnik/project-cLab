@@ -10,7 +10,7 @@
 
 char *dupl(char *str){
 	char *nstr = malloc((sizeoffd(str) + 1) * sizeof(char)); /* allocate space for the new string */
-	char *ptr = nstr; /* pointer to set the charatcres of the new string */
+	char *ptr = nstr; /* pointer to set the Characters of the new string */
 	
 	/* check the allocation */
 	isnull(nstr, NULL);
@@ -635,10 +635,10 @@ int removeWhiteSpace (char *str){
   void trimEnd(char *str) {
     int len;
     len = strlen(str);
-    while (len > 0 && isspace(str[len-1])) {
+    while (len > 0 && isspace(str[len-1])) {/*arriving to the last space in the string*/
         len--;
     }
-    str[len] = '\0';
+    str[len] = '\0';/*changing it to a '\0' so the computer will know its the end of the String*/
 }
 
 
