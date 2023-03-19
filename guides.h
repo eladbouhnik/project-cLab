@@ -45,12 +45,12 @@ typedef struct {
 #define NUM_OF_GUIDES 4 /* the number of guides */
 extern guide guids[]; /* array of the guides */
 
-
-/*	function that perform binary search to look for guide and
+	/*function that perform binary search to look for guide and
 	in the "guids".
 	assume they are sorted alphabetically by names.
 	return a pointer to the ones with matching name.
-	if couldn't find any, return NULL.								*/
+	if couldn't find any, return NULL.*/
+
 guide *findguide(char *name);
 
 #endif
