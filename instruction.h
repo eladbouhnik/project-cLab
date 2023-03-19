@@ -16,7 +16,7 @@
 #define MINOPNUM -2048  /* the lowest signed integer that can be held in 12 bits: -2^11 */
 
 /*	count the number of operands the instruction ip can get and put the number in counter.
-	ip is a pointer to the instruct.														*/
+	ip is a pointer to the instruct*/
 #define opcount(counter, ip)	{									\
 									counter = 0;					\
 									if (ip->opsc != AN) counter++;	\
