@@ -18,7 +18,7 @@
 /*	count the number of operands the instruction ip can get and put the number in counter.
 	ip is a pointer to the instruct*/
 #define opcount(counter, ip)	{									\
-									counter = 0;					\
+									counter = 0;			\
 									if (ip->opsc != AN) counter++;	\
 									if (ip->optg != AN) counter++;	\
 								}
