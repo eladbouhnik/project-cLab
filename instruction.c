@@ -18,9 +18,9 @@ instruct *findinst(char *str){
 	lc = str[i];
 	str[i] = EOS;
 	
-/*	binary search on insts */
+	/* binary search on insts */
 	while (low <= high && inst == NULL){
-	/*	the middle of the searched area */
+		/* the middle of the searched area */
 		int mid = low + (high - low)/2;  /*a form of averag that doesn't go beyong high in the calculation (to prevent runtime errors) */
 		int cmp = strcmp(str, insts[mid].name); /* the relation between the strings (<,>,=) */
 		
@@ -33,7 +33,7 @@ instruct *findinst(char *str){
 		}
 	}
 	
-	str[i] = lc;/*  return the original character */
+	str[i] = lc; /* return the original character */
 	
 	return inst;
 }
