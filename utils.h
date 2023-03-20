@@ -134,11 +134,11 @@ char *islbl (char *line);
 	if y is non-positive, return 1.	*/
 int powr(int x, int y);
 
-
-
+/*	creates a array of strings So that we can mess with the values inside the brackets	*/
 char** getParams(char *str);
 
 
+/*	removing all of the white spaces in the string	*/
 int removeWhiteSpace (char *str);
 
 
