@@ -132,7 +132,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				freeLblList(enthead);
 				freeLblList(exthead);
 				freeMemList(head);
-		    freeLblList(headOfLbl);
+				freeLblList(headOfLbl);
 				fclose(source);
 				report(ERR_MEM, ln);
 				return ERR_MEM;
@@ -220,15 +220,13 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				adrsc = findadr(args[i++]);
 			case ONEARGS: /* there is one arguments - which is the target */
 				adrtg = findadr(args[i++]);
-
-
-				if(findadr(args[0]) == AC2|| findadr(args[0]) == 	TWO_REG_PARAM){
+				if(findadr(args[0]) == AC2|| findadr(args[0]) == TWO_REG_PARAM){
 					params = getParams(args[0]);
 					adrParam1 = findadr(params[0]);
-			 	    adrParam2 = findadr(params[1]);
-			 	   if(adrtg==TWO_REG_PARAM)
-			 	    adrtg=AC2;
-			  }
+			 	    	adrParam2 = findadr(params[1]);
+			 	   	if(adrtg==TWO_REG_PARAM)
+			 	    		adrtg=AC2;
+				  }
 			break;
 		} /* adrtg will remain ACN if there are no operands */
 
@@ -284,67 +282,67 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				trgtreg = atoi(params[1] + 1);
 				copy = malloc(strlen(fstArg) + 1);
 				strcpy(copy,fstArg);
-					tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
+				tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
 				
-					/* get the kind of label (if exists) */
-					if((kind = getkindLbl(headOfLbl, tok)) == NOTFOUND){
-						freeall(line, args, NULL);
-						report(status = ERR_ARGS_LBL, ln);
-						continue; /* move to the next line */
-					}
+				/* get the kind of label (if exists) */
+				if((kind = getkindLbl(headOfLbl, tok)) == NOTFOUND){
+					freeall(line, args, NULL);
+					report(status = ERR_ARGS_LBL, ln);
+					continue; /* move to the next line */
+				}
 
 					
 					
-					cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
-					/* check if the label is external */
-					if(kind == GEXT){
-						char *strIC; /* the place where the reference to the external label is */
+				cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
+				/* check if the label is external */
+				if(kind == GEXT){
+					char *strIC; /* the place where the reference to the external label is */
 						
-						opcE(cop); /* set the ARE */
-
-						/* cast the position to binary */
-						if((strIC = itostr(MEM_STRT + ic)) == NULL){
-							freeall(line, args, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;	
-						}
+					opcE(cop); /* set the ARE */
+					
+					/* cast the position to binary */
+					if((strIC = itostr(MEM_STRT + ic)) == NULL){
+						freeall(line, args, NULL);
+						freeLblList(enthead);
+						freeLblList(exthead);
+						freeMemList(head);
+						freeLblList(headOfLbl);
+						fclose(source);
+						report(ERR_MEM, ln);
+						return ERR_MEM;	
+					}
 
 						/* add the label and position to the reference list */
-						if ((extTemp = addnextlbl(extNode, tok, strIC,kind)) == NULL){ /* check if added to the list */
-							freeall(line, args, strIC, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
-                       extNode = extTemp;
-						free(strIC);
-						 free(copy);
-					} else {
-						opcR(cop); /* set the ARE */
+					if ((extTemp = addnextlbl(extNode, tok, strIC,kind)) == NULL){ /* check if added to the list */
+						freeall(line, args, strIC, NULL);
+						freeLblList(enthead);
+						freeLblList(exthead);
+						freeMemList(head);
+						freeLblList(headOfLbl);
+						fclose(source);
+						report(ERR_MEM, ln);
+						return ERR_MEM;
 					}
-					
+                       			extNode = extTemp;
+					free(strIC);
+					 free(copy);
+			}
+			else {
+				opcR(cop); /* set the ARE */
+			}		
 					/* add label to the list */
 					if (wordnode != NULL){
-                    /* make sure it is on the operation word (it could be NULL if there was a previous error) */
-						if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
-							freeall(line, args, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-		                    freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
+                	    /* make sure it is on the operation word (it could be NULL if there was a previous error) */
+					if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
+						freeall(line, args, NULL);
+						freeLblList(enthead);
+						freeLblList(exthead);
+						freeMemList(head);
+		                    		freeLblList(headOfLbl);
+						fclose(source);
+						report(ERR_MEM, ln);
+						return ERR_MEM;
+					}
 						wordnode = tmp; /* change to the next node */
 						ic++; /* count the added node */
 					}
@@ -465,7 +463,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+							freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -484,7 +482,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+							freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -499,27 +497,27 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 				case AC2: /* the operand is lable with parameters  (should add the address of the label and the parameters*/
 
-            copy = malloc(strlen(fstArg) + 1);
+            			copy = malloc(strlen(fstArg) + 1);
 				strcpy(copy,fstArg);
-					tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
+				tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
 
-					/* get the kind of label (if exists) */
-					if((kind = getkindLbl(headOfLbl, tok)) == NOTFOUND){
-						freeall(line, args, NULL);
-						report(status = ERR_ARGS_LBL, ln);
-						continue; /* move to the next line */
-					}
+				/* get the kind of label (if exists) */
+				if((kind = getkindLbl(headOfLbl, tok)) == NOTFOUND){
+					freeall(line, args, NULL);
+					report(status = ERR_ARGS_LBL, ln);
+					continue; /* move to the next line */
+				}
 
 					
 
-					cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
-					/* check if the label is external */
-					if(kind == GEXT){
-						char *strIC; /* the place where the reference to the external label is */
+				cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
+				/* check if the label is external */
+				if(kind == GEXT){
+					char *strIC; /* the place where the reference to the external label is */
 						
-						opcE(cop); /* set the ARE */
-
-						/* cast the position to binary */
+					opcE(cop); /* set the ARE */
+					
+					/* cast the position to binary */
 				    	if((strIC = itostr(MEM_STRT + ic)) == NULL){
 							freeall(line, args, NULL);
 							freeLblList(enthead);
@@ -542,7 +540,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							report(ERR_MEM, ln);
 							return ERR_MEM;
 						}
-                        extNode=extTemp;
+						extNode=extTemp;
 						free(strIC);
 						free(copy);
 					} else {
@@ -557,7 +555,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -568,7 +566,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 					while(twoParams != 2 && status != 1){
 	
-                    if(twoParams==0){
+                   		 if(twoParams==0){
 					if(adrParam1== AC0){
 					/* convert to string the field's number */
 					if ((cop = itostr(atoi(params[0]+1))) == NULL){
@@ -576,7 +574,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+						freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -645,7 +643,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							report(ERR_MEM, ln);
 							return ERR_MEM;
 						}
-                        extNode=extTemp;
+                        			extNode=extTemp;
 						free(strIC);
 					} else {
 						opcR(cop); /* set the ARE */
@@ -659,7 +657,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+							freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -673,7 +671,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					
 				}
 					else 
-					{ /*adrParam1 == AC3*/
+					{ 
+					/*adrParam1 == AC3*/
 					cop = (char *)malloc((WORDSIZE + 1) * sizeof(char)); /* allocate new memory for the operand */
 					reg = atoi(params[0] + 1); /* get the register's number */
 					
@@ -683,7 +682,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+						freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -708,7 +707,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -729,7 +728,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+						freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -811,7 +810,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -837,7 +836,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+		        			freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -862,7 +861,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -879,7 +878,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
                     
                     
                     
-                }
+                	}
                 }
                 free(cop);
                 
@@ -896,7 +895,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+		        			freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -921,7 +920,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -955,7 +954,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+		       				 freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -971,7 +970,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		           freeLblList(headOfLbl);
+							freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -1007,7 +1006,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -1019,7 +1018,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-              freeLblList(headOfLbl);
+							freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -1037,7 +1036,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -1060,7 +1059,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
-		        freeLblList(headOfLbl);
+						freeLblList(headOfLbl);
 						fclose(source);
 						report(ERR_MEM, ln);
 						return ERR_MEM;
@@ -1083,7 +1082,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
-		          freeLblList(headOfLbl);
+		          				freeLblList(headOfLbl);
 							fclose(source);
 							report(ERR_MEM, ln);
 							return ERR_MEM;
@@ -1109,7 +1108,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		freeall(line, args, NULL);
 	} /* end of while (scan the source file) */
 	
-freeLblList(headOfLbl);
+	freeLblList(headOfLbl);
 
 
 
