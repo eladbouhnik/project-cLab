@@ -6,14 +6,14 @@
 /* adds 2 strings together, free the previous str1 and put the new string in str1 */
 #define addfree(str1, str2) {										\
 								char *temp = addstr(str1, str2);	\
-								free(str1);							\
-								str1 = temp;						\
+								free(str1);				\
+								str1 = temp;				\
 							}
 #define MAXLEN 80	/* max length of the line */
 
 #define EAS ".as"	/* the input file */
 #define EAM ".am"	/* the input file after pre-assembler */
-#define EOB ".obj"	/* the file after convertion to 32bit format */
+#define EOB ".ob"	/* the file after convertion to 32bit format */
 #define ENT ".ent"	/* list of labels that are allowed to use in other files */
 #define EXT ".ext"	/* list of labels requested to use from other files */
 
