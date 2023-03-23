@@ -35,6 +35,8 @@
 
 #define DEFK 		0 	/* the default kind of information */
 #define EXTADR "00000000000001" /* the address given to external labels */
+#define DEFADR "00000000000000" /* the default address */
+
 #define NOTFOUND	 -1 	/* "getking" return this value if couldn't find label */
 
 /* to set the ARE bits of a string representing a memory word */
