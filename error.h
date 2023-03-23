@@ -21,11 +21,11 @@
 #define LBLLENMAX 30 /* the max amount of chars label's name can have */
 
 /* errors in the code provided by the user */
-#define ERR_FULL_MEM		5		/* reached the end of the allowed memory (MEM_END) */
+#define ERR_FULL_MEM		5       /* reached the end of the allowed memory (MEM_END) */
 #define ERR_COM_IL		6	/* illegal comma (comma somewhere before the first operand) */
 #define ERR_COM_MI		7	/* missing comma between operands */
 #define ERR_COM_MU		8	/* multiple consecutive commas */
-#define ERR_LINE_EXR		9		/* the line is too long */
+#define ERR_LINE_EXR		9       /* the line is too long */
 #define ERR_LINE_OLBL		10	/* there is only label declaration in the line */
 #define ERR_OPD			11	/* illegal operand */
 #define ERR_OPT			12	/* unknown operation (not instruction or guide) */
@@ -37,7 +37,7 @@
 #define ERR_LBL			18	/* the label already exists */
 #define ERR_LBL_DEC		19	/* invalid label name in declaration */
 #define ERR_LBL_LEN		20	/* Label name in label declaration is too long */
-#define ERR_EXR 		21  /*Extraneous text after end of command*/
+#define ERR_EXR 		21      /*Extraneous text after end of command*/
 
 /*	report an error according to the error code given to the function.
 	print explanation about the error to the standard output with the
