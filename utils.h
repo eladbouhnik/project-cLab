@@ -192,7 +192,7 @@ int fcloseall (FILE * ptr, ...);
 	If the char we are standing on is a space, we erase it.
 	When we arrived to the last space in the String
 	Well change it to a '\0' so the computer will know its the end of the String 
-*\
+*/
 
 
 void trimEnd(char *str);
