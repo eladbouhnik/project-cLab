@@ -201,11 +201,11 @@ int printLblList(FILE *fp, lblword * head){
 }
 
 int binary_to_decimal(char *binary) {
-    int len = strlen(binary),i;
+    int len = strlen(binary),i;	/*	getting the string length	*/
     int decimal = 0;
     int base = 1;
     for (i = len - 1; i >= 0; i--) {
-        if (binary[i] == '1') {
+        if (binary[i] == '1') { /*	if there is a value then we need to add it to the decimal number	*/
             decimal += base;
         }
         base *= 2;
@@ -219,12 +219,12 @@ int countNodes(lblword *head) {
    lblword *current;
    current = head;
    
-   while(current != NULL) {
+   while(current != NULL) {/*	stop when you arraived to the last node	*/
       count++;
       current = current->next;
    }
    
-   return count;
+   return count;  /*	returning the number of nodes	*/
 }
 
 
