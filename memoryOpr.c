@@ -201,30 +201,30 @@ int printLblList(FILE *fp, lblword * head){
 }
 
 int binary_to_decimal(char *binary) {
-    int len = strlen(binary),i;	/* get the length of the binary string */
-    int decimal = 0;
-    int base = 1;
-    for (i = len - 1; i >= 0; i--) { /* iterate through the binary string from right to left */
-        if (binary[i] == '1') { /* if the current bit is 1, add the corresponding base value to the decimal value */
-            decimal += base;
-        }
-        base *= 2; /* update the base value for the next iteration */
-    }
-    return decimal;
+	int len = strlen(binary),i;	/* get the length of the binary string */
+    	int decimal = 0;
+    	int base = 1;
+    	for (i = len - 1; i >= 0; i--) { /* iterate through the binary string from right to left */
+		if (binary[i] == '1') { /* if the current bit is 1, add the corresponding base value to the decimal value */
+            		decimal += base;
+        	}
+        	base *= 2; /* update the base value for the next iteration */
+   	 }
+   	 return decimal;
 }
 
 
 int countNodes(lblword *head) {
-   int count = 0; /* initialize a variable to store the count of nodes in the list */
-   lblword *current; /*create a pointer to traverse the linked list, and initialize it to the head of the list */
-   current = head;
+	int count = 0; /* initialize a variable to store the count of nodes in the list */
+	lblword *current; /*create a pointer to traverse the linked list, and initialize it to the head of the list */
+        current = head;
    
-   while(current != NULL) { /* while the current node is not NULL */
-      count++;
-      current = current->next; /* move the current pointer to the next node in the list */
-   }
+   	while(current != NULL) { /* while the current node is not NULL */
+      		count++;
+      		current = current->next; /* move the current pointer to the next node in the list */
+   	}
    
-   return count;  /* return the final count of nodes in the linked list */
+   	return count;  /* return the final count of nodes in the linked list */
 }
 
 
