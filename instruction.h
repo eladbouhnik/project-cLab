@@ -31,7 +31,7 @@
 #define AN   0 /* no operand */
 #define A0   1 /* can have a number as operand */
 #define A1   2 /* can have a label as operand */
-#define A2   4 /* can have a field of a struct as operand */
+#define A2   4 /* can have a operand of addressing method 2 */
 #define A3   8 /* can have a register as operand */
 #define ACN -1 /* the addressing wasn't set */
 #define AC0  0 /* the code of the A0 or there is no operand */
