@@ -8,6 +8,7 @@
 #define ONEARGS 1 /* only one argument in the current line */
 #define TWOARGS 2 /* two argument in the current line */
 #define TWO_REG_PARAM -2 /* to indicate if we get two registers for parameters in address method 2*/
+
 /* return the bit in position "bit" of the word (from right to left) */
 #define gbw(str, bit) ((str)[(WORDSIZE - 1) - (bit)])
 
@@ -38,7 +39,7 @@ extern char *regs[]; /* declare the register array */
 char *dupl(char *str);
 
 
-/*	duplicate a 10-bit word (string).
+/*	duplicate a 14-bit word (string).
 	is the str is NULL, the function return an empty
 	string (that should be freed later).
 	free the memory with the "free" function from "stdlib.h".
@@ -152,11 +153,11 @@ char *islbl (char *line);
 
 int powr(int x, int y);
 
-/*	creates a array of strings So that we can mess with the values inside the brackets	*/
+/* returns an array containing strings of the two parameters as part of the address method 2 */
 
 char** getParams(char *str);
 
-/*	removing all of the white spaces in the string	*/
+/* removing all of the white spaces in the string  */
 
 int removeWhiteSpace (char *str);
 
@@ -189,10 +190,9 @@ int fcloseall (FILE * ptr, ...);
 
 
 /*
-	Starting from the end
-	If the char we are standing on is a space, we erase it.
-	When we arrived to the last space in the String
-	Well change it to a '\0' so the computer will know its the end of the String 
+	remove all white characters from the end of the string.
+	put '\0' at the end of the string.
+	
 */
 
 void trimEnd(char *str);
