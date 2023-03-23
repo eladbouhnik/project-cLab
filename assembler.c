@@ -11,7 +11,7 @@
 	file (to import a label from another file, use the ".extern" guide).
 	the ".obj" file is the original program and data created by the guides, after conversion to codes
 	in special base 2 representing them. 
-	BY Raanan Adam and Elad bouhnik.
+	By Raanan Adam and Elad bouhnik.
 	 */
 
 #include <stdio.h>
@@ -20,10 +20,10 @@
 
 int main(int argc, char *argv[]){
 	/* scan the argv array and compile each file  */
-	if(argc == 1){
-			printf("ERROR-The number of arguments in the command line is not as required\n");
-			return 1;
-		}
+	if(argc == 1){ /* if there is only the name of the program */
+		printf("ERROR-The number of arguments in the command line is not as required\n");
+		return 1;
+	}
 
 	while (0 < --argc){
 		int status = SUCC; /* flag to remember if "pass1" found errors in the code */
