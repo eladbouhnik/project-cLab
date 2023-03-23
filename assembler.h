@@ -68,7 +68,6 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status);
 		ERR_OPD
 		ERR_ARGS_NUM
 		ERR_ARGS_LBL
-		ERR_ARGS_STC
 		ERR_ENT_LBL
 		ERR_LMT_DAN
 		and the checks that "splitline" from "supfuncs.h" perform.
