@@ -429,7 +429,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				report(ERR_MEM, ln);
 				return ERR_MEM;
 			}
-			strcpy(opword,"00000000000000");
+			strcpy(opword,DEFADR);
 
 			opcA(opword);  /*set the ARE of the operation word */
 
