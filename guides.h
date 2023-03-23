@@ -5,15 +5,13 @@
 #ifndef GUIDES
 #define GUIDES
 
-/* for the data allocation guides which has integers has operands (struct and data) */
-#define MAXDTNUM 8191  /* the highest signed integer that can be held in 14 bits: 2^9 - 1 */
+/* for the data allocation guide which has integers has operands (data) */
+#define MAXDTNUM 8191  /* the highest signed integer that can be held in 14 bits: 2^13 - 1 */
 #define MINDTNUM -8192  /* the lowest signed integer that can be held in 14 bits: -2^13 */
 
 
 /* constants for the guides */
 #define GNUMOP 2 /* the maximum number of operands for guide (when the guide can't have infite number of operands) */
-#define GSTCFN 2 /* number of fields in struct */
-
 #define GNM -1 /* no maximum number of operands */
 
 #define GNDEF 0 /* the guide doesn't have a default type for all the operands or the array isn't used*/
