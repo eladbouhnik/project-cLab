@@ -25,7 +25,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	*memhead = (memnode = addnext(NULL, NULL)); /* create dummy head */
 	datahead = (datanode = addnext(NULL, NULL)); /* create dummy head */
 	
-	*headOfLbl = (lblNode = addnextlbl(NULL,"head", "null", 0)); /* table of labels - creating head*/
+	*headOfLbl = (lblNode = addnextlbl(NULL,"head", "null", DEFK)); /* table of labels - creating head*/
 	ptr=*headOfLbl;
 	fullName = addstr(nameOfFile, EAM); /* the name of the source file */
 	
