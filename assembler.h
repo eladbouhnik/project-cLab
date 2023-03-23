@@ -7,13 +7,11 @@
 #include "memoryOpr.h"
 #include "ioFuncs.h"
 
-
-
 /*	take "nameOfFile" and read the file named "nameOfFile" with the extension EAS.
 	write to the file named "nameOfFile" with the extension EAM the lines of the
 	EAS file.
 	any unnecessary spaces and tabs are removed, comment lines are removed,
-	and all the macros are expended.
+	and all the macros are expanded.
 	
 	the function does checks for:
 		ERR_MEM
@@ -23,12 +21,12 @@
 		ERR_LINE_EXR
 	
 	and return the code of the error in case of error, return
-	SUCC otherwise.																*/
+	SUCC otherwise.		
+*/
 int preAsm(char *nameOfFile);
 
-
 /*	take "nameOfFile" and read the file named "nameOfFile" with the extension EAM.
-	create table of the labels found in the file.
+	create a table of the labels found in the file.
 	create a list of the operations' encoding and put a pointer to the head
 	in "memhead".
 	
@@ -45,10 +43,11 @@ int preAsm(char *nameOfFile);
 		and the checks that "splitline" from "supfuncs.h" perform.
 	
 	and return the code of the error in case of error, return
-	SUCC otherwise (the status parameter is there to change the default from SUCC).		*/
+	SUCC otherwise (the status parameter is there to change the default from SUCC).
+
+		
+*/
 int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status);
-
-
 
 /*	take "nameOfFile" and read the file named "nameOfFile" with the extension EAM.
 	use the labels in headOfLbl to create the operands' encoding.
@@ -77,5 +76,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status);
 	if status is not SUCC or found an error the ENT, EXT and EOB files won't be created.
 	
 	and return the code of the error in case of error, return
-	SUCC otherwise.																*/
+	SUCC otherwise.														
+*/
+
 int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head);
