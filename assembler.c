@@ -1,23 +1,22 @@
-/* 	Raanan Adam 
-	Elad bouhnik
+/*
 	this program compile ".as" files and writes to the standard output
 	the errors if there are errors.
 	
-	the errors that are reported, reffering to lines in the created ".am" file (unless written otherwise).
+	the errors that are reported, referring to lines in the created ".am" file (unless written otherwise).
 	
-	if the compilation went successfully, ".ent", ".ext" and ".obj" files will be created.
-	the ".ent" file is a list of labels declared in the current file that are aloowed to use
-	in other files (it is posiable using the ".entry" guide).
+	if the compilation went successfully, ".ent", ".ext" and ".ob" files will be created.
+	the ".ent" file is a list of labels declared in the current file that are allowed to use
+	in other files (it is possible using the ".entry" guide).
 	the ".ext" file is a list of labels from other files that are used in the current
-	file (to import a label from other file, use the ".extern" guide).
-	the ".obj" file is the original program and data created by the guides, after convertion to codes
-	in special base 2 representing them. 	*/
+	file (to import a label from another file, use the ".extern" guide).
+	the ".obj" file is the original program and data created by the guides, after conversion to codes
+	in special base 2 representing them. 
+	BY Raanan Adam and Elad bouhnik.
+	 */
 
 #include <stdio.h>
 #include "assembler.h"
 #include "error.h"
-
-
 
 int main(int argc, char *argv[]){
 	/* scan the argv array and compile each file  */
@@ -44,7 +43,7 @@ int main(int argc, char *argv[]){
 		}
 		
 		/* perform the second pass on the pre-compiled file and check for fatal errors */
-		if ((status = pass2(argv[argc], status, headOfLbl, memhead)) == ERR_MEM || status == ERR_FOE || status == ERR_PRINT || status == ERR_FCE){
+		if ((status = pass2(argv[argc] , status, headOfLbl, memhead)) == ERR_MEM || status == ERR_FOE || status == ERR_PRINT || status == ERR_FCE){
 			return status;
 		}
 
