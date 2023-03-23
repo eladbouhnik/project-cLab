@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
 
 	while (0 < --argc){
 		int status = SUCC; /* flag to remember if "pass1" found errors in the code */
-		lblword *headOfLbl=NULL; /* table for the labels */
+		lblword *headOfLbl = NULL; /* table for the labels */
 		word *memhead = NULL; /* take the list of nodes representing the binary encoding of the operations (from "pass1") and pass it to "pass2" */
 		
 		printf("-------------       Compiling \"%s\"       -------------\n", argv[argc]);
