@@ -310,33 +310,33 @@ char *itostr(int num){
 	return numstr;
 }
 
-	int isAdr2(char *str){
-        char *ptr = str;
+int isAdr2(char *str){
+	char *ptr = str;
         int count = 0;
         while (*ptr != EOS && *ptr != OPEN_BRAC){ 
-		    count++;
-			ptr++;
-		}
-		if(count==0 || (*ptr==EOS && *ptr!=OPEN_BRAC))
-		 return 0;
-		 ptr++;
-		 count = 0;
-		 while (*ptr != EOS && *ptr != COM){
-		    count++;
-		   	ptr++;
-		}
-		if(count==0 || (*ptr==EOS && *ptr != COM))
+		count++;
+        	ptr++;
+	}
+	if(count == 0 || (*ptr == EOS && *ptr != OPEN_BRAC))
+		return 0;
+	ptr++;
+	count = 0;
+	while (*ptr != EOS && *ptr != COM){
+		count++;
+		ptr++;
+	}
+		if(count == 0 || (*ptr == EOS && *ptr != COM))
 		     return 0;
 		 ptr++;
 		 count = 0;   
 		 
 		 while (*ptr != EOS && *ptr != CLOSE_BRAC){
-		    count++;
+		 	count++;
 		   	ptr++;
 		 }
-		 if(count==0 || (*ptr==EOS && *ptr != CLOSE_BRAC))
-		     return 0;
-		  return 1;
+		 if(count == 0 || (*ptr == EOS && *ptr != CLOSE_BRAC))
+		 	return 0;
+		 return 1;
   }
 
 char *islbl(char *line){
@@ -355,11 +355,11 @@ char *islbl(char *line){
 	}
 	
 	/* check that the last character in the field is COL */
-	if (line[i] != COL || (line[i+1] != BLK && line[i + 1] != EOS)){
+	if (line[i] != COL || (line[i + 1] != BLK && line[i + 1] != EOS)){
 		return NULL;
 	}
 	
-	 /* saev the first character after the first field and replace it with EOS*/
+	 /* save the first character after the first field and replace it with EOS*/
 	lc = line[i];
 	line[i] = EOS;
 	
@@ -369,7 +369,7 @@ char *islbl(char *line){
 		return NULL;
 	}
 	
-	/* chek if the label is a name of instruction */
+	/* check if the label is a name of instruction */
 	if (findinst(line) != NULL){
 		line[i] = lc; /* put the character back */
 		return NULL;
