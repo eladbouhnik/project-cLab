@@ -9,7 +9,7 @@
 	in other files (it is possible using the ".entry" guide).
 	the ".ext" file is a list of labels from other files that are used in the current
 	file (to import a label from another file, use the ".extern" guide).
-	the ".obj" file is the original program and data created by the guides, after conversion to codes
+	the ".ob" file is the original program and data created by the guides, after conversion to codes
 	in special base 2 representing them. 
 	By Raanan Adam and Elad bouhnik.
 	 */
