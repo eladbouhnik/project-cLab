@@ -70,11 +70,11 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		char *lbl; /* string for the label of the current line */
 		int lbllen; /* the length of the label declaration */
 		int adrtg = ACN; /* the addressing method of the target operand */
-		int adrsc = ACN; /* the addressing methos of the source operand */
+		int adrsc = ACN; /* the addressing methods of the source operand */
 		int adrParam1 = ACN;
 		int adrParam2 = ACN;
 		instruct *ip; /* instruct pointer */
-		int opNum; /* the number of operands requied by the current instruction */
+		int opNum; /* the number of operands required by the current instruction */
 		ln++; /* count the current line */
 
 
@@ -124,7 +124,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		}
 		
 
-		/* split the line to several strings for further analyze */
+		/* split the line to several strings for further analyse */
 		if((res = splitline(offset, (void**)(&ip), &args, &lenargs)) != GTYP && res != ITYP) {/* if res is not GTYP or ITYP there was an error */
 			freeall(line, args, NULL);
 			/* check which error occurred */
@@ -153,7 +153,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				continue; /* move to the next line */
 			}
 			
-			/* check the num of operands */
+			/* check the number of operands */
 			if(!((gp->opmin) <= lenargs && (lenargs <= (gp->opmax) || (gp->opmax) == GNM))){ 
 				freeall(line, args, NULL);
 				report(status = ERR_ARGS_NUM, ln);
@@ -163,7 +163,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 			/* scan the operands and add them to the entry list */
 			for(i = 0; i < lenargs; i++){
 				int kind; /* the kind of the label */
-				char address[WORDSIZE]; /* the address of the entried label */
+				char address[WORDSIZE]; /* the address of the entries label */
 				char *lblw; /* the label's word */
 				int j;
 				
@@ -182,7 +182,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				/* get the label's address */
 				
 				for (j = 0; j < ADRSTRT; j++){
-					address[j] = '0'; /* set to zero the unused chaacters */
+					address[j] = '0'; /* set to zero the unused characters */
 				}
 				for (j = 0; j < ADRLEN; j++){
 					gbw(address, j) = gbw(lblw, j + ADRSTRT); /* shift the bits of the address to the right */
@@ -272,7 +272,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 			char *tok;
 			char *copy;
 			int kind;
-			word *tmp; /* temporery word to check ERR_MEM */
+			word *tmp; /* temporary word to check ERR_MEM */
 			if(adrtg == AC3 && adrsc == AC3){
 				srcreg = atoi(fstArg + 1); /* the number of the source register (the first character of the register is 'r') */
 				trgtreg = atoi(secArg + 1); /* the number of the target register (the first character of the register is 'r') */
@@ -904,7 +904,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					cop[WORDSIZE] = EOS; /* sign the end of the string */
 					
 					/* write the register's number to the string */
-					for(i = 0; i < WORDSIZE; i++ ) cop[i] = '0'; /* utilized cells to '0' */
+					for(i = 0; i < WORDSIZE; i++ ) cop[i] = '0'; /* utilised cells to '0' */
 					for(i = 0; i < REGLEN; i++ ) { /* write the register number to the operand word */
 						/* if there is only one operand, it should be written on the target register.
 						   if there are two operands, it should be written to the source register	*/
@@ -935,7 +935,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					
 			} /* end of switch for first operand */
 
-			/* check the adressing method of the second operand */ 
+			/* check the addressing method of the second operand */ 
 
 			switch(lenargs == TWOARGS ? adrtg : ACN){ /* if there are two arguments it is the target, otherwise check no one */
 				case AC0: /* the operand is a number */
@@ -1067,8 +1067,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					
 					cop[WORDSIZE] = EOS; /* sign the end of the string */
 					
-					for(i = 0; i < WORDSIZE; i++ ) cop[i] = '0'; /* utilized cells to '0' */
-					for(i = 0; i < REGLEN; i++ ) { /* write the register nimber to the operand word */
+					for(i = 0; i < WORDSIZE; i++ ) cop[i] = '0'; /* utilised cells to '0' */
+					for(i = 0; i < REGLEN; i++ ) { /* write the register number to the operand word */
 						/* write the register's number on the  target register */
 						gbw(cop, i + REGTGST) = getbit(reg, i) + '0' ;
 					}
@@ -1234,7 +1234,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	
 	free(fullName);
 	
-	/* print the extern list to the extern file (exthead->next  to skip the dummy head) */
+	/* print the external list to the extern file (exthead->next  to skip the dummy head) */
 	if ((res = printLblList(ext, exthead->next)) != SUCC) {
 		freeLblList(exthead);
 		fclose(ext);
@@ -1254,3 +1254,6 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 	return SUCC;
 } /* end of pass2 */
+
+
+
