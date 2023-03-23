@@ -2,7 +2,6 @@
 #include "error.h"
 #include "ioFuncs.h"
 
-
 void report(int error, int line) {
 	
 	/* check if it is a fatal error (general error)*/
