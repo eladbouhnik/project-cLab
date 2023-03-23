@@ -89,7 +89,7 @@ int getkindLbl(lblword *headOfLbl, char *nameOfLbl){
 	lblword *ptr= headOfLbl; /* pointer to scan the linked list */
 	
 	/* scan the list until ptr is NULL or untill a node with the same name is found */
-	for (	ptr = ptr->next	;	ptr != NULL && strcmp(ptr->name, nameOfLbl)	;	ptr = ptr->next);
+	for ( ptr = ptr->next ; ptr != NULL && strcmp(ptr->name, nameOfLbl) ; ptr = ptr->next);
 	
 	/* return NOTFOUND if the node wasn't found. otherwise, return the kind */
 	return ptr == NULL ? NOTFOUND : ptr->kind;
@@ -101,11 +101,11 @@ void freeMemList(word * head){
 	
 	/* scan the list and free each node and its field */
 	while(head != NULL) {
-		tmp = head -> next;
 		
+		tmp = head -> next;
 		free(head -> data);
 		free(head);
-		
+
 		head = tmp; /* continue to the next node */
 	}
 	
@@ -120,9 +120,7 @@ void freeLblList(lblword * head){
 	while(head != NULL ) {
 	
 		tmp = head -> next;
-
 		freeall(head->name,head->data,  NULL);
-
 		free(head);
 
 		head = tmp; /* continue to the next node */
@@ -138,17 +136,12 @@ int printMemList(FILE *fp, word *head, int num1, int num2){
 	int memc = MEM_STRT; /* memory counter */
 	char adrStr[4]; /* the string of the address*/
 	
-
-	
-	
 	/* write to the file coded numbers */
-  fprintf(fp,"\t\t%d\t%d",num1,num2);
-	
+	fprintf(fp,"\t\t%d\t%d",num1,num2);
 	
 	/* scan the list */
 	while (head != NULL) {
 		char *adrs2, *data2; /* the data needed to be printed */
-		
 		sprintf(adrStr,"%d",memc++);
 		
 		/* convert to special base 2 */
@@ -184,8 +177,8 @@ int printLblList(FILE *fp, lblword * head){
 	/* scan the list */
 
 	while (head != NULL) {
-     char code[4];
-     code[3]='\0';
+      		char code[4];
+     		code[3]= EOS; /* put NULL at the end of the array */
      
 		sprintf(code,"%d",binary_to_decimal(head->data)); /* the data needed to be printed */
 			   
