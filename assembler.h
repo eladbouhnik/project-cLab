@@ -20,7 +20,7 @@
 		ERR_FCE
 		ERR_LINE_EXR
 	
-	and return the code of the error in case of error, return
+	and return the error in case of error, return
 	SUCC otherwise.		
 */
 int preAsm(char *nameOfFile);
