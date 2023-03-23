@@ -9,8 +9,6 @@
 #include "utils.h"
 #include "instruction.h"
 
-
-
 int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	int IC = 0, DC = 0; /* the instruction counter and the data counter */
 	int i;
@@ -106,7 +104,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 		}
 		
 		
-		/* split the line to its comoponents */
+		/* split the line to its components */
 		if ((typ = splitline(offset, &opr, &args, &lenargs)) != GTYP && typ != ITYP){ /* check for errors */
 			freeall(line, args, lbl, NULL);
 			
@@ -186,9 +184,9 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				
 				/* check if the operand should be an integer */
 				if (op->deftype == INTTYP || (op->deftype == GNDEF && op->optypes[i] == INTTYP)){
-					int intop; /* the operand after convertion to int from string */
+					int intop; /* the operand after conversion to int from string */
 					char *suf; /* for the strtol function */
-					char *biop; /* the operand after convertion to binary */
+					char *biop; /* the operand after conversion to binary */
 					
 					/* convert the operand to integer */
 					intop = (int)strtol(args[i], &suf, DECBASE);
@@ -297,7 +295,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 			
 			/* check if there is a label declaration in the line */
 			if (lbl != NULL){
-				printf("Warnning in line %d: Labels before \".entry\" and \".extern\" are ignored.\n", ln);
+				printf("Warning in line %d: Labels before \".entry\" and \".extern\" are ignored.\n", ln);
 				free(lbl);
 			}
 			
@@ -334,7 +332,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 					if (!isalnum(*ptr++)){ /* check the current character */
 						report(status = ERR_OPD, ln);
 						allalnum = !allalnum; /* continue to the next operand */
-						break; /* there is no reason to check the otehr characters of the current operand */
+						break; /* there is no reason to check the other characters of the current operand */
 					}
 				}
 				
@@ -368,7 +366,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 			int adr[] = {ACN, ACN}; /* the addressing of the operands given in the line */
 			int fcont = SUCC; /* flag to remember to continue to the next line */
 			int fadr3 = AC3; /* flag to check if both operands are registers (the addressings are AC3) */
-			opcount(nop, op); /* put in nop the number of requaired operands */
+			opcount(nop, op); /* put in nop the number of required operands */
 			
 			/* check the number of operands */
 			if (nop != lenargs){
@@ -553,6 +551,8 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	}
 	
 	
+
+
 
 
 
