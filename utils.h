@@ -118,7 +118,7 @@ char *addstr(char *, char *);
 char *isreg(char *str);
 
 /*	get int and returns its binary form (in two's complement) as a string.
-	the string has 10 characters and any bit that is after the tenth bit
+	the string has 14 characters and any bit that is after the 14th bit
 	will be ignored.
 	if It couldn't allocate memory, return NULL.		
 */
