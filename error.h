@@ -37,7 +37,7 @@
 #define ERR_LBL			18	/* the label already exists */
 #define ERR_LBL_DEC		19	/* invalid label name in declaration */
 #define ERR_LBL_LEN		20	/* Label name in label declaration is too long */
-#define ERR_EXR 		21      /*Extraneous text after end of command*/
+#define ERR_EXR 		21      /* Extraneous text after end of command*/
 
 /*	report an error according to the error code given to the function.
 	print explanation about the error to the standard output with the
