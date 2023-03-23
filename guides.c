@@ -15,8 +15,8 @@ guide *findguide(char *str){
 	
 	/* binary search on guids */
 	while (low <= high && gd == NULL){
-	/*	the middle of the searched area */
-		int mid = low + (high - low)/2; /* a form of averag that doesn't go beyong high in the calculation (to prevent runtime errors) */
+		/* the middle of the searched area */
+		int mid = low + (high - low)/2; /* a form of average that doesn't go beyond high in the calculation (to prevent runtime errors) */
 		int cmp = strcmp(str, guids[mid].name);  /*the relation between the strings (<,>,=) */
 		
 		if (cmp < 0){
