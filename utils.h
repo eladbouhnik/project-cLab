@@ -1,9 +1,6 @@
 
 #include <stdio.h>
-
-
 #define LBLLENMAX 30 /* the max amount of chars label's name can have */
-
 
 #define REGSIZE 8 /* the number of registers */
 #define BINARYBASE 2 /* the binary base */
@@ -31,12 +28,12 @@
 
 
 
-extern char *regs[]; /* declar the register array */
+extern char *regs[]; /* declare the register array */
 
  	
 /*	duplicate the first field of the given string (pls free the memory with
 	the "free" function from "stdlib.h").
-	if couldn't allocate memory for the new string, return NULL.	
+	if It couldn't allocate memory for the new string, return NULL.	
 */
 char *dupl(char *str);
 
@@ -45,15 +42,15 @@ char *dupl(char *str);
 	is the str is NULL, the function return an empty
 	string (that should be freed later).
 	free the memory with the "free" function from "stdlib.h".
-	if couldn't allocate memory for the new string, return NULL.	
+	if It couldn't allocate memory for the new string, return NULL.	
 */
 
 char *duplw(char *str);
 
 
-/*	duplicate the  given string (pls free the memmory with
+/*	duplicate the  given string (pls free the memory with
 	the "free" function from "stdlin.h").
-	if couldn't allocate memmory for the new string, return NULL.
+	if It couldn't allocate memory for the new string, return NULL.
 */
 
 char *duplstr(char *str);
@@ -78,23 +75,23 @@ int sizeoffd(char *str);
 /*		split a line of command
 		check the command and put a pointer to it in "command".
 		put pointers to the arguments in "args" in the same order as in the line (adds '\0' to the end of each one).
-		the function support strings (the first character of an operand most be QUM for it to be treated as string).
+		the function supports strings (the first character of an operand must be QUM for it to be treated as string).
 		put the number of arguments in "lenargs".
-		in any case, use the "free" function from stdlib.h on "args" when finished using it.
+		In any case, use the "free" function from stdlib.h on "args" when finished using it.
 	assume
-		there is atleast one character in the line.
+		there is at least one character in the line.
 		the line doesn't start with blank
 		the line doesn't contain tabs.
 	return
-		ERR_MEM			couldn't finish the task du to memmory shortage.
+		ERR_MEM			couldn't finish the task du to memory shortage.
 		ERR_OPT			unknown command name.
-		ERR_COM_IL		illegal comma has been found.
+		ERR_COM_IL		an illegal comma has been found.
 		ERR_COM_MU		found multiple consecutive commas.
-		ERR_COM_MI		there is a missing comma.
+		ERR_COM_MI		There is a missing comma.
 		ERR_OPD			a string wasn't properly closed.
-		GTYP			finished successfully and found guide type.
-		ITYP			finished successfully and found instruction type.
-	warnning
+		GTYP			finished successfully and found a guide type.
+		ITYP			finished successfully and found the instruction type.
+	warning
 		the function changes the content of the given string.          
 */
 
@@ -112,18 +109,18 @@ char *addstr(char *, char *);
 
 
 
-/*	check if given string is a register.
+/*	check if the given string is a register.
 	search legal register name syntax.
-	returns NULL if illegal name.
-	return pointer to string that equal to the name of the register.
+	returns NULL if the name.
+	return pointer to string that is equal to the name of the register.
 */
 
 char *isreg(char *str);
 
-/*	get int and returns its binary form (in two's compliment) as a string.
+/*	get int and returns its binary form (in two's complement) as a string.
 	the string has 10 characters and any bit that is after the tenth bit
 	will be ignored.
-	if couldn't allocate memory, return NULL.		
+	if It couldn't allocate memory, return NULL.		
 */
 
 char *itostr(int num); 
@@ -131,8 +128,8 @@ char *itostr(int num);
 
 /*	search for addressing method for given operand
 	based on the operand's syntax.
-	return the legal addresing method (AC0, AC1, AC2, AC3)
-	or ERR_OPD if illegel operand.			
+	return the legal addressing method (AC0, AC1, AC2, AC3)
+	or ERR_OPD if illegal operand.			
 */
 int findadr(char *str);
 
@@ -181,7 +178,7 @@ void freeall (void * ptr, ...);
 
 
 /*	fclose all given FILE pointers.						
-	the file has to be opend with fopen.
+	the file has to be opened with fopen.
 	even if couldn't close a file, the function 
 	will try to close the next FILE pointers.
 	return SUCC if succeded to close all
@@ -190,4 +187,6 @@ void freeall (void * ptr, ...);
 
 int fcloseall (FILE * ptr, ...);
 void trimEnd(char *str);
+
+
 
