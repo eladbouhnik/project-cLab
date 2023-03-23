@@ -49,7 +49,6 @@ typedef struct {
 	unsigned int opsc : ADSNUM; /* addressing options for the source operand (each bit signal a specific addressing that is available) */
 	unsigned int optg : ADSNUM; /* addressing options for the target operand (each bit signal a specific addressing that is available) */
 	unsigned int opParam1 : ADSNUM; /* addressing options for the first parameter of the operand (each bit signal a specific addressing that is available) */
-	
 	unsigned int opParam2 : ADSNUM; /* addressing options for the second parameter of the operand (each bit signal a specific addressing that is available) */
 } instruct;
 
