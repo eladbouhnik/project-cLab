@@ -145,7 +145,7 @@ int binary_to_decimal(char *binary);
 
 /*
 	A method that counts the number of nodes
-*\
+*/
 
 int countNodes(lblword *head);
 
