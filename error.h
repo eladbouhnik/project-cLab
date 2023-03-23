@@ -31,14 +31,13 @@
 #define ERR_OPT			12	/* unknown operation (not instruction or guide) */
 #define ERR_ARGS_NUM		13	/* invalid number of operands */
 #define ERR_ARGS_LBL		14	/* unknown label in operand */
-#define ERR_ARGS_STC		15	/* label isn't struct */
-#define ERR_ENT_LBL		16	/* external label can't be entry */
-#define ERR_LMT_DAN		17	/* number too big or small for operand numbers */
-#define ERR_LMT_GUN		18	/* number too big or small for guide numbers */
-#define ERR_LBL			19	/* the label already exists */
-#define ERR_LBL_DEC		20	/* invalid label name in declaration */
-#define ERR_LBL_LEN		21	/* Label name in label declaration is too long */
-#define ERR_EXR 		22  /*Extraneous text after end of command*/
+#define ERR_ENT_LBL		15	/* external label can't be entry */
+#define ERR_LMT_DAN		16	/* number too big or small for operand numbers */
+#define ERR_LMT_GUN		17	/* number too big or small for guide numbers */
+#define ERR_LBL			18	/* the label already exists */
+#define ERR_LBL_DEC		19	/* invalid label name in declaration */
+#define ERR_LBL_LEN		20	/* Label name in label declaration is too long */
+#define ERR_EXR 		21  /*Extraneous text after end of command*/
 
 /*	report an error according to the error code given to the function.
 	print explanation about the error to the standard output with the
