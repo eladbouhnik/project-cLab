@@ -69,10 +69,6 @@ void report(int error, int line) {
 			printf("Unknown label in operand.");
 			break;
 			
-		case ERR_ARGS_STC:
-			printf("Label isn't struct.");
-			break;
-			
 		case ERR_LBL:
 			printf("The label already exists.");
 			break;
