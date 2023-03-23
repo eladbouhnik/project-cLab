@@ -632,13 +632,17 @@ int removeWhiteSpace (char *str){
 		return 1;
   }
   
-  void trimEnd(char *str) {
-    int len;
-    len = strlen(str);
-    while (len > 0 && isspace(str[len-1])) {/*arriving to the last space in the string*/
-        len--;
-    }
-    str[len] = '\0';/*changing it to a '\0' so the computer will know its the end of the String*/
+void trimEnd(char *str) {
+	int len;
+    	len = strlen(str);    /* Get the length of the string.*/
+	/* starting from the end of the string, remove any whitespace characters */
+    	/* until a non-whitespace character is encountered. */
+    	while (len > 0 && isspace(str[len - 1])) {
+        	len--;
+    	}
+	/* Replace the first whitespace character (if any) after the end of the
+        actual string with the null terminator character.*/
+    	str[len] = EOS;
 }
 
 
