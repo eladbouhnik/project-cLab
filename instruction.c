@@ -3,10 +3,7 @@
 #include "ioFuncs.h"
 
 instruct *findinst(char *str){
-	
 	/* array of the instructions (instruct is defined in instructs.h) */
-
-					
 	int low = 0, high = INSTSIZE - 1;  /*the limits of the array */
 	instruct *inst = NULL; /* the instruction with the same name */
 	int i;
@@ -21,7 +18,7 @@ instruct *findinst(char *str){
 	/* binary search on insts */
 	while (low <= high && inst == NULL){
 		/* the middle of the searched area */
-		int mid = low + (high - low)/2;  /*a form of averag that doesn't go beyong high in the calculation (to prevent runtime errors) */
+		int mid = low + (high - low)/2;  /*a form of average that doesn't go beyond high in the calculation (to prevent runtime errors) */
 		int cmp = strcmp(str, insts[mid].name); /* the relation between the strings (<,>,=) */
 		
 		if (cmp < 0){
@@ -42,4 +39,6 @@ instruct *findinst(char *str){
 
 	
 	
+
+
 
