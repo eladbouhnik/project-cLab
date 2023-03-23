@@ -9,27 +9,25 @@
 int addMcr(newMacro *head,char *name,char *content){
 	char *cpyName, *cpyContent;
 	newMacro *current = head;
-	while (current->next != NULL) {
+	while (current->next != NULL) { /*advanced to the last node */
         	current = current->next;
-  }
+  	}
     
-	current->next = (newMacro *) malloc(sizeof(newMacro)); /*need to check allocation*/
-	if(current->next==NULL)
+	current->next = (newMacro *) malloc(sizeof(newMacro));  /* the new node that will be added to the list */
+	if(current->next == NULL) /*check the allocation*/
     		return ERR_MEM;
     
-    /* duplicate the given name and content */
+    	/* duplicate the given name and content - to prevent aliasing */
 	if ((cpyName = duplstr(name)) == NULL || (cpyContent = duplstr(content)) == NULL){
 		free(cpyName);
 		free(cpyContent);
 		return ERR_MEM;
 	}
+	
 	current->next->name = cpyName;
 	current->next->content = cpyContent;
 	current->next->next = NULL;
     
-    	
-
-
 	return SUCC;
 }
 
