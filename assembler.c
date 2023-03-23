@@ -1,18 +1,15 @@
 /*
-	this program compile ".as" files and writes to the standard output
-	the errors if there are errors.
+	This program compiles ".as" files and outputs any errors to the standard output.
+	The reported errors will refer to lines in the created ".am" file, unless stated otherwise.
+	If the compilation is successful, three files will be created: ".ent", ".ext", and ".ob".
 	
-	the errors that are reported, referring to lines in the created ".am" file (unless written otherwise).
+	The ".ent" file is a list of labels declared in the current file that can be used in other files through the ".entry" guide.
+	The ".ext" file is a list of labels from other files that are used in the current file, and can be imported using the ".extern" guide.
+	The ".ob" file is the original program and data created by the guides, converted into codes represented in a special base 2.
 	
-	if the compilation went successfully, ".ent", ".ext" and ".ob" files will be created.
-	the ".ent" file is a list of labels declared in the current file that are allowed to use
-	in other files (it is possible using the ".entry" guide).
-	the ".ext" file is a list of labels from other files that are used in the current
-	file (to import a label from another file, use the ".extern" guide).
-	the ".ob" file is the original program and data created by the guides, after conversion to codes
-	in special base 2 representing them. 
-	By Raanan Adam and Elad bouhnik.
-	 */
+	This program was developed by Raanan Adam and Elad Bouhnik.
+	
+ */
 
 #include <stdio.h>
 #include "assembler.h"
