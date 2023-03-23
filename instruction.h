@@ -23,7 +23,7 @@
 									if (ip->optg != AN) counter++;	\
 								}
 
-#define ITYP -1 /*flag to identify insruction*/
+#define ITYP -1 /*flag to identify instruction*/
 
 #define ADSNUM 4 /* the number of addressing methods */
 
@@ -58,11 +58,13 @@ typedef struct {
 /*	function that perform binary search to look for instruction and
 	in the "insts".
 	assume they are sorted alphabetically by names.
-	return a pointer to the ones with matching name.
+	return a pointer to the ones with matching names.
 	if couldn't find any, return NULL				*/
 instruct *findinst(char *str);
 
 extern instruct insts[];
 #endif
+
+
 
 
