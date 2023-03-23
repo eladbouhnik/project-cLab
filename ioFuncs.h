@@ -13,7 +13,7 @@
 
 #define EAS ".as"	/* the input file */
 #define EAM ".am"	/* the input file after pre-assembler */
-#define EOB ".ob"	/* the file after convertion to 32bit format */
+#define EOB ".ob"	/* the file after convertion to special base 2 format */
 #define ENT ".ent"	/* list of labels that are allowed to use in other files */
 #define EXT ".ext"	/* list of labels requested to use from other files */
 
@@ -22,13 +22,13 @@
 #define BLK ' '		/* blank - separate fields */
 #define TAB '\t'	/* tab - separate fields */
 #define COM ','		/* coma - separate operands */
-#define DOT '.'		/* dot - the prefix of a guide and the field specifier of a struct */
+#define DOT '.'		/* dot - the prefix of a guide */
 #define HSH '#'		/* hashtag - the start of a number (as operand of instruction) */
 #define COL ':'		/* colon - the end of a label */
 #define SCO ';'		/* semicolon - the start of a comment line */
 #define QUM '\"'	/* quotation marks - the start and end of a string */
 #define ESTR ""		/* empty string */
-#define OPEN_BRAC '(' /* for operand of Addressing method of jump with parameters */
+#define OPEN_BRAC '('   /* for operand of Addressing method of jump with parameters */
 #define CLOSE_BRAC ')'
 
 
