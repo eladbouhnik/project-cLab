@@ -140,13 +140,15 @@ int printMemList(FILE *fp, word *head, int num1, int num2);
 int printLblList(FILE *fp, lblword *head);
 
 /* 
-	A method that converts a binary number to a decimal number 
+	converts a binary number to a decimal number
+	and return the decimal number
 */
 
 int binary_to_decimal(char *binary);
 
 /*
-	A method that counts the number of nodes
+	count  the number of node in a linked list
+	returns the number of nodes
 */
 
 int countNodes(lblword *head);
