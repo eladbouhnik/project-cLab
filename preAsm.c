@@ -80,7 +80,7 @@ int preAsm(char *nameOfFile){
 					return ERR_PRINT;
 				}
 			}
-			else { /* not a macro or a refference to a macro */
+			else { /* not a macro or a reference to a macro */
 				if(writeline(target, line) == ERR_PRINT){/*couldn't print to the file*/
 					fclose(source);
 					fclose(target);
@@ -160,3 +160,6 @@ int preAsm(char *nameOfFile){
 
 	return status;
 }
+
+
+
