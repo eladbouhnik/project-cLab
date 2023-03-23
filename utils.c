@@ -198,7 +198,7 @@ int splitline(char *line, void **command, char * **args, int *lenargs){
 			if (*ptrl == COM){ /* check consecutive commas */
 				return ERR_COM_MU;
 			} else if (*ptrl == EOS){ /* the line ended instead of having a next argument */
-				return ERR_EXR;  /*the comma is an estraneous text */
+				return ERR_EXR;  /*the comma is an extraneous text */
 			}
 		}
 	}
