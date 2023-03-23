@@ -5,7 +5,6 @@
 #include "error.h"
 #include "ioFuncs.h"
 
-
 word *addnext(word *curr, char *data){
 	word *newword; /* the new node that will be added to the list */
 	word *tmp = NULL; /* to remember the previous "next" node of curr */
@@ -89,7 +88,7 @@ int getkindLbl(lblword *headOfLbl, char *nameOfLbl){
 	
 	lblword *ptr= headOfLbl; /* pointer to scan the linked list */
 	
-	/* scan the list untill ptr is NULL or untill a node with the same name is found */
+	/* scan the list until ptr is NULL or untill a node with the same name is found */
 	for (	ptr = ptr->next	;	ptr != NULL && strcmp(ptr->name, nameOfLbl)	;	ptr = ptr->next);
 	
 	/* return NOTFOUND if the node wasn't found. otherwise, return the kind */
@@ -136,7 +135,7 @@ void freeLblList(lblword * head){
 
 
 int printMemList(FILE *fp, word *head, int num1, int num2){
-	int memc = MEM_STRT; /* memmory counter */
+	int memc = MEM_STRT; /* memory counter */
 	char adrStr[4]; /* the string of the address*/
 	
 
@@ -190,11 +189,11 @@ int printLblList(FILE *fp, lblword * head){
      
 		sprintf(code,"%d",binary_to_decimal(head->data)); /* the data needed to be printed */
 			   
-		/* if it's not the first line, seperate the new line from the previous one */
+		/* if it's not the first line, separate the new line from the previous one */
 		if (firstline){
 			firstline = !firstline; /* turn off the flag */
 		} else {
-			writeline(fp, ESTR); /* seperate the lines */
+			writeline(fp, ESTR); /* separate the lines */
 		}
 		
 		/* print the numbers to the given file */
@@ -234,4 +233,6 @@ int countNodes(lblword *head) {
    
    return count;
 }
+
+
 
