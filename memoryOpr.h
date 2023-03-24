@@ -21,7 +21,7 @@
 #define ARELEN		2	/* the length of the ARE bits */
 #define ARESTRT		0	/* the start position of the ARE bits*/
 #define ADRLEN		11	/* the length of address */
-#define ADRSTRT		2	/* teh position of the last significant bit of the address */
+#define ADRSTRT		2	/* the position of the last significant bit of the address */
 #define OPCLEN		4	/* the number of bits in the operation code part */
 #define OPCSTRT		6	/* the position of the last significant bit of the op code */
 #define ADSLEN		2	/* the length of the addressings in binary */
@@ -29,6 +29,7 @@
 #define ADSSCST		4	/* the starting position of the source addressing */
 #define ADS_PARAM1_ST	12	/* the starting position of the first parameter addressing */
 #define ADS_PARAM2_ST	10	/* the starting position of the first parameter addressing */
+#define LEN_ADR         4	/* the length of a string of address (for example: 0100) */
 #define REGLEN		6	/* the length of register */
 #define REGTGST		2	/* the starting position of the target register */
 #define REGSCST		8	/* the starting position of the source register */
@@ -37,7 +38,7 @@
 #define EXTADR "00000000000001" /* the address given to external labels */
 #define DEFADR "00000000000000" /* the default address */
 
-#define NOTFOUND	 -1 	/* "getking" return this value if couldn't find label */
+#define NOTFOUND	 -1 	/* "getkindLbl" return this value if couldn't find label */
 
 /* to set the ARE bits of a string representing a memory word */
 #define __A 0 /* the memory word is absolute */
@@ -62,7 +63,7 @@ typedef struct dataword {
 /* define list of labels and their data */
 typedef struct lblword {
 	char *name; /* the name of the label */
-	char *data; /* the data of the label (for example: line, address, etc...) */
+	char *data; /* the data of the label (address) */
 	int kind; /* A/R/E */
 	struct lblword *next; /* the next node */
 } lblword;
@@ -73,7 +74,7 @@ typedef struct lblword {
 	put the new node between "curr" and "cur->next".
 	if "curr" is NULL, the function create a new node
 	without setting it has a next node of a list.
-	return the new node. if couldn't allocate memory
+	returns the new node. if couldn't allocate memory
 	for the new node, return NULL.						
 */
 word *addnext(word *curr, char *data);
@@ -83,7 +84,7 @@ word *addnext(word *curr, char *data);
 	put the new node between "curr" and "cur->next".
 	if "curr" is NULL, the function create a new node
 	without setting it has the next node of a list.
-	return the new node. if couldn't allocate memory
+	returns the new node. if couldn't allocate memory
 	for the new node, return NULL.						
 */
 lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind);
@@ -91,14 +92,14 @@ lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind);
 
 
 /*	search in the table for the content with a name matching
-	key, and return the content.
+	and returns the content.
 	if you can't find anything, return NULL.			
 */
 char *getcontentLbl(lblword *head, char *nameOflbl);
 
 
 /*	search in the table for the kind with a name matching
-	key, and return the kind.
+	and returns the kind.
 	if you can't find anything, return NULL.				
 */
 int getkindLbl(lblword *headOfLbl, char *nameOfLbl);
@@ -120,7 +121,7 @@ void freeLblList(lblword * head);
 		.
 		MEM_STRT+n	node_n.data
 	
-	everything is printed in base 2.
+	the data is printed in  special base 2 , and the address in base 10.
 	assume the nodes' data is of length WORDSIZE
 	and is a binary representation.
 	
@@ -132,7 +133,7 @@ int printMemList(FILE *fp, word *head, int num1, int num2);
 
 
 /*	print "lblword" list to the given file.
-	return ERR_MEM if there is memmory problem.
+	return ERR_MEM if there is memory problem.
 	return ERR_PRINT if it couldn't print to the file.
 	otherwise, return SUCC.						
 */
