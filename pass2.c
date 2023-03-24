@@ -281,8 +281,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				trgtreg = atoi(secArg + 1); /* the number of the target register (the first character of the register is 'r') */
 			}
 			else{
-				srcreg = atoi(params[0] + 1); /* the number of the first parameter register (the first character of the register is 'r') */
-				trgtreg = atoi(params[1] + 1); /* the number of the second parameter register (the first character of the register is 'r') */
+				srcreg = atoi(fstPar + 1); /* the number of the first parameter register (the first character of the register is 'r') */
+				trgtreg = atoi(secPar + 1); /* the number of the second parameter register (the first character of the register is 'r') */
 				copy = malloc(strlen(fstArg) + 1); /* create a copy of the first operand for strtok */
 				strcpy(copy,fstArg); /* copy of the first operand */
 				tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
@@ -494,7 +494,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					free(cop);
 					break;
 
-				case AC2: /* the operand is lable with parameters  (should add the address of the label and the parameters*/
+				case AC2: /* the operand is lable with parameters  (should add the address of the label and the parameters */
 
             			copy = malloc(strlen(fstArg) + 1); /* allocate space for the copy of the first operand */
 				strcpy(copy,fstArg); /* copy the first operand */
@@ -565,7 +565,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
                    		       		        if(twoParams == 0){
 						                if(adrParam1 == AC0){
 								/* convert to string the field's number */
-									if ((cop = itostr(atoi(params[0] + 1))) == NULL){
+									if ((cop = itostr(atoi(fstPar + 1))) == NULL){
 										freeall(line, args, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
