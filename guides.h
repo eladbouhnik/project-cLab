@@ -11,7 +11,6 @@
 
 
 /* constants for the guides */
-#define GNUMOP 2 /* the maximum number of operands for guide (when the guide can't have infinite number of operands) */
 #define GNM -1 /* no maximum number of operands */
 
 #define STRTYP 1 /* The operand is string. */
