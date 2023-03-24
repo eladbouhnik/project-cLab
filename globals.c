@@ -3,10 +3,10 @@
 
 /* array of the guides (guide is defined in guides.h) */
 guide guids[] =	{
-					{"data"	, 1 , GNM , GALL , INTTYP , {GNDEF , GNDEF }},
-					{"entry" , 1 , 1 , GENT	 , LBLTYP , {GNDEF , GNDEF }},
-					{"extern" , 1 , 1 , GEXT , LBLTYP , {GNDEF , GNDEF}},
-					{"string" , 1 , 1 , GALL , STRTYP , {GNDEF , GNDEF }}
+					{"data"	, 1 , GNM , GALL , INTTYP },
+					{"entry" , 1 , 1 , GENT	 , LBLTYP },
+					{"extern" , 1 , 1 , GEXT , LBLTYP },
+					{"string" , 1 , 1 , GALL , STRTYP }
 					
 		 };
 /* array of the instructions (instruct is defined in instruction.h) */		
