@@ -183,7 +183,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				word *temp; /* temp word for "addnext" */
 				
 				/* check if the operand should be an integer */
-				if (op->deftype == INTTYP || (op->deftype == GNDEF && op->optypes[i] == INTTYP)){
+				if (op->deftype == INTTYP){
 					int intop; /* the operand after conversion to int from string */
 					char *suf; /* for the strtol function */
 					char *biop; /* the operand after conversion to binary */
@@ -229,7 +229,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 					
 					datanode = temp; /* change to the new node */
 					DC++;
-				} else if (op->deftype == STRTYP || (op->deftype == GNDEF && op->optypes[i] == STRTYP)){ /* check if the operand should be a string */
+				} else if (op->deftype == STRTYP){ /* check if the operand should be a string */
 					char *ptr; /* pointer to scan the string */
 					/* check if the first character is QUM */
 					
