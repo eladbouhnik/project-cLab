@@ -3,7 +3,7 @@
 #include "ioFuncs.h"
 
 instruct *findinst(char *str){
-	/* array of the instructions (instruct is defined in instructs.h) */
+	/* array of the instructions (instruct is defined in instruction.h) */
 	int low = 0, high = INSTSIZE - 1;  /*the limits of the array */
 	instruct *inst = NULL; /* the instruction with the same name */
 	int i;
