@@ -150,7 +150,7 @@ int binary_to_decimal(char *binary);
 
 
 /*
-	count  the number of node in a linked list,
+	count the number of node in a linked list,
 	returns the number of nodes.
 */
 
