@@ -1,5 +1,5 @@
 /*
-	the errors that are handeld by the functions and a function to 
+	the errors that are handled by the functions and a function to 
 	report the errors to the standard output.
 */
 
