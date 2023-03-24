@@ -19,7 +19,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	int ln = 0; /* line counter */
 	int ic = 0, dc = 0; /* instruction and data counters */
 	int i;
-	int Two_Par_stat =0;
+	int Two_Par_stat = 0; /* the status of problems with parameters */
 	int res; /* returned value from functions that report about more than one error */
 	word *wordnode = head; /* pointer to edit the word list */
 	lblword *enthead ; /* list for entry labels */
@@ -65,14 +65,14 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 		char *offset = line; /* to skip the part of the line with label */
 		char **args; /* the operands of the current line */
-		char **params;
+		char **params; /* the parameters of the current line */
 		int lenargs; /* number of operands */
 		char *lbl; /* string for the label of the current line */
 		int lbllen; /* the length of the label declaration */
 		int adrtg = ACN; /* the addressing method of the target operand */
 		int adrsc = ACN; /* the addressing methods of the source operand */
-		int adrParam1 = ACN;
-		int adrParam2 = ACN;
+		int adrParam1 = ACN; /* the addressing method of the first paramter */
+		int adrParam2 = ACN; /* the addressing methods of the second parameter */
 		instruct *ip; /* instruct pointer */
 		int opNum; /* the number of operands required by the current instruction */
 		ln++; /* count the current line */
@@ -220,12 +220,12 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				adrsc = findadr(args[i++]);
 			case ONEARGS: /* there is one arguments - which is the target */
 				adrtg = findadr(args[i++]);
-				if(findadr(args[0]) == AC2|| findadr(args[0]) == TWO_REG_PARAM){
-					params = getParams(args[0]);
-					adrParam1 = findadr(params[0]);
-			 	    	adrParam2 = findadr(params[1]);
-			 	   	if(adrtg==TWO_REG_PARAM)
-			 	    		adrtg=AC2;
+				if(findadr(args[0]) == AC2|| findadr(args[0]) == TWO_REG_PARAM){ /* if the oprand is from addressing method 2*/
+					params = getParams(args[0]); /* get the parameters */
+					adrParam1 = findadr(params[0]); /* save the addressing method of the first parameter */
+			 	    	adrParam2 = findadr(params[1]); /* save the addressing method of the second parameter */
+			 	   	if(adrtg == TWO_REG_PARAM)
+			 	    		adrtg = AC2;
 				  }
 			break;
 		} /* adrtg will remain ACN if there are no operands */
@@ -243,8 +243,10 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 			for(i = 0; i < ADSLEN; i++) { 
 				gbw(wordnode->data, i + ADSTGST) = getbit((adrtg == ACN ? AC0 : adrtg), i) + '0'; /* write the addressing method of the target */
 				gbw(wordnode->data, i + ADSSCST) = getbit((adrsc == ACN ? AC0 : adrsc), i) + '0'; /* write the addressing method of the source */
-                if(adrParam1!= ACN &&adrParam2!=ACN){
-				gbw(wordnode->data, i + ADS_PARAM1_ST) = getbit((adrParam1 == ACN ? AC0 : adrParam1), i) + '0';
+				
+                		if(adrParam1 != ACN && adrParam2 != ACN){ /* if there are parameters */
+					/* write the addressing method of the parameters */
+				gbw(wordnode->data, i + ADS_PARAM1_ST) = getbit((adrParam1 == ACN ? AC0 : adrParam1), i) + '0'; 
 				
 				gbw(wordnode->data, i + ADS_PARAM2_ST) = getbit((adrParam2 == ACN ? AC0 : adrParam2), i) + '0';
 
@@ -252,10 +254,11 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		}
 		}
 
-		/* check if the addressing method match the instruction (if there is no operand the check does nothing) */
+		/* check if the addressing method match the instruction (if there is no operand or parameters the check does nothing) */
 		if ((adrtg != ACN && (ip->optg & powr(BINARYBASE, adrtg)) != powr(BINARYBASE, adrtg)) 
-		 || (adrsc != ACN && (ip->opsc & powr(BINARYBASE, adrsc)) != powr(BINARYBASE, adrsc))||
-		  (adrParam1!= ACN && (ip->opParam1 & powr(BINARYBASE, adrParam1)) != powr(BINARYBASE, adrParam1)) || (adrParam2!= ACN &&(ip->opParam2 & powr(BINARYBASE, adrParam2)) != powr(BINARYBASE, adrParam2))) {
+		 || (adrsc != ACN && (ip->opsc & powr(BINARYBASE, adrsc)) != powr(BINARYBASE, adrsc)) ||
+		  (adrParam1 != ACN && (ip->opParam1 & powr(BINARYBASE, adrParam1)) != powr(BINARYBASE, adrParam1)) ||
+		    (adrParam2 != ACN && (ip->opParam2 & powr(BINARYBASE, adrParam2)) != powr(BINARYBASE, adrParam2))) {
 			report(status = ERR_OPD, ln);
 			freeall(line, args, NULL);
 			continue; /* move to the next line */
@@ -263,8 +266,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		
 		ic++; /* count the operation word */
 
-		/* check if both operands are register (if there is less then two operands, at least one of them will be ACN) */
-		if ((adrtg == AC3 && adrsc == AC3)|| (adrParam1== AC3&& adrParam2==AC3)){
+		/* check if both operands or parameters are register (if there is less then two operands, at least one of them will be ACN) */
+		if ((adrtg == AC3 && adrsc == AC3)|| (adrParam1 == AC3 && adrParam2 == AC3)){
 			char memword[WORDSIZE + 1]; /* the registers' string word */
 			int srcreg; 
 			int trgtreg; 
@@ -278,10 +281,10 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				trgtreg = atoi(secArg + 1); /* the number of the target register (the first character of the register is 'r') */
 			}
 			else{
-				srcreg = atoi(params[0] + 1);
-				trgtreg = atoi(params[1] + 1);
-				copy = malloc(strlen(fstArg) + 1);
-				strcpy(copy,fstArg);
+				srcreg = atoi(params[0] + 1); /* the number of the first parameter register (the first character of the register is 'r') */
+				trgtreg = atoi(params[1] + 1); /* the number of the second parameter register (the first character of the register is 'r') */
+				copy = malloc(strlen(fstArg) + 1); /* create a copy of the first operand for strtok */
+				strcpy(copy,fstArg); /* copy of the first operand */
 				tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
 				
 				/* get the kind of label (if exists) */
@@ -291,8 +294,6 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					continue; /* move to the next line */
 				}
 
-					
-					
 				cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
 				/* check if the label is external */
 				if(kind == GEXT){
@@ -323,9 +324,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						report(ERR_MEM, ln);
 						return ERR_MEM;
 					}
-                       			extNode = extTemp;
-					free(strIC);
-					 free(copy);
+                       			extNode = extTemp; /* point to the new node */
+					freeall(strIC,copy,NULL);
 			}
 			else {
 				opcR(cop); /* set the ARE */
@@ -376,11 +376,11 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 			int op; /* numeric operands (after cast to int) */
 			int kind; /* the kind of label operand */
-			int reg,twoParams=0; /* the number of a register operand (for example  1  is the number of the register "r1") */
+			int reg,twoParams = 0; /* the number of a register operand (for example  1  is the number of the register "r1") */
 			word *tmp; /* temporery word for ERR_MEM checks */
 			char *cop; /* the string words that should be added to the memory list */
-			char *tok;
-			char *copy;
+			char *tok; /* for strtok */
+			char *copy; /* for strtok */
 			/* check the adressing method of the first operand */ 	
 
 			switch(lenargs == TWOARGS ? adrsc : adrtg){ /* if there is one operand it is the target, if there are two it is the source */
@@ -431,7 +431,6 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				case AC1: /* the operand is a label */
 					/* check if label (operand) exists in the table*/
 			
-
 					if((kind = getkindLbl(headOfLbl, fstArg)) == NOTFOUND){ 
 						freeall(line, args, NULL);
 						report(status = ERR_ARGS_LBL, ln);
@@ -458,7 +457,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						}
 						
 						/* add the label and position to the reference list */
-						if((extTemp=addnextlbl(extNode, fstArg, strIC,kind)) == NULL){
+						if((extTemp = addnextlbl(extNode, fstArg, strIC,kind)) == NULL){
 							freeall(line, args, strIC, NULL);
 							freeLblList(enthead);
 							freeLblList(exthead);
@@ -468,7 +467,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							report(ERR_MEM, ln);
 							return ERR_MEM;
 						}
-						extNode = extTemp;
+						extNode = extTemp; /* point to the new node */
 						free(strIC);
 					} else {
 						opcR(cop); /* set the ARE */
@@ -497,8 +496,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 				case AC2: /* the operand is lable with parameters  (should add the address of the label and the parameters*/
 
-            			copy = malloc(strlen(fstArg) + 1);
-				strcpy(copy,fstArg);
+            			copy = malloc(strlen(fstArg) + 1); /* allocate space for the copy of the first operand */
+				strcpy(copy,fstArg); /* copy the first operand */
 				tok = strtok(copy, "("); /* return pointer the the first encounter with open Brackets */
 
 				/* get the kind of label (if exists) */
@@ -507,8 +506,6 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					report(status = ERR_ARGS_LBL, ln);
 					continue; /* move to the next line */
 				}
-
-					
 
 				cop = getcontentLbl(headOfLbl, tok); /* get the labels address */
 				/* check if the label is external */
@@ -519,33 +516,33 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					
 					/* cast the position to binary */
 				    	if((strIC = itostr(MEM_STRT + ic)) == NULL){
-							freeall(line, args, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;	
-						}
+						freeall(line, args, NULL);
+						freeLblList(enthead);
+						freeLblList(exthead);
+						freeMemList(head);
+						freeLblList(headOfLbl);
+						fclose(source);
+						report(ERR_MEM, ln);
+						return ERR_MEM;	
+					}
 
 						/* add the label and position to the reference list */
-						if ((extTemp=addnextlbl(extNode, tok, strIC,kind)) == NULL){ /* check if added to the list */
-							freeall(line, args, strIC, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
-						extNode=extTemp;
-						free(strIC);
-						free(copy);
-					} else {
-						opcR(cop); /* set the ARE */
+					if ((extTemp = addnextlbl(extNode, tok, strIC,kind)) == NULL){ /* check if added to the list */
+						freeall(line, args, strIC, NULL);
+						freeLblList(enthead);
+						freeLblList(exthead);
+						freeMemList(head);
+						freeLblList(headOfLbl);
+						fclose(source);
+						report(ERR_MEM, ln);
+						return ERR_MEM;
 					}
+					extNode = extTemp; /* point to the new node */
+					freeall(strIC,copy,NULL);
+				}
+				else {
+					opcR(cop); /* set the ARE */
+				}
 
 					/* add label to the list */
 					if (wordnode != NULL){
@@ -565,9 +562,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					}
 
 					while(twoParams != 2 && status != 1){
-	
-                   		 if(twoParams==0){
-					if(adrParam1== AC0){
+                   		       	if(twoParams == 0){
+						if(adrParam1== AC0){
 					/* convert to string the field's number */
 					if ((cop = itostr(atoi(params[0]+1))) == NULL){
 						freeall(line, args, NULL);
@@ -608,7 +604,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						if((kind = getkindLbl(headOfLbl, params[0])) == NOTFOUND){
 							freeall(line, args, NULL);
 							report(status = ERR_ARGS_LBL, ln);
-							Two_Par_stat=1;
+							Two_Par_stat = 1;
 							break; /* move to the next line */
 						}
 						cop = getcontentLbl(headOfLbl, params[0]); /* get the labels address */
