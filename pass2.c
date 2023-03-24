@@ -561,111 +561,111 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						ic++; /* count the added node */
 					}
 
-					while(twoParams != 2 && Two_Par_sta != 1){
-                   		       		if(twoParams == 0){
-							if(adrParam1== AC0){
-					/* convert to string the field's number */
-					if ((cop = itostr(atoi(params[0]+1))) == NULL){
-						freeall(line, args, NULL);
-						freeLblList(enthead);
-						freeLblList(exthead);
-						freeMemList(head);
-						freeLblList(headOfLbl);
-						fclose(source);
-						report(ERR_MEM, ln);
-						return ERR_MEM;
-					}
+						while(twoParams != TWO_ARGS && !Two_Par_sta ){ /* as long as we have not reached two parameters and there are no errors */
+                   		       		        if(twoParams == 0){
+						                if(adrParam1 == AC0){
+								/* convert to string the field's number */
+									if ((cop = itostr(atoi(params[0] + 1))) == NULL){
+										freeall(line, args, NULL);
+										freeLblList(enthead);
+										freeLblList(exthead);
+										freeMemList(head);
+										freeLblList(headOfLbl);
+										fclose(source);
+										report(ERR_MEM, ln);
+										return ERR_MEM;
+									}
 					
-					movel2(cop); /* move to make place for the ARE */
-					opcA(cop); /* set teh ARE */
+									movel2(cop); /* move to make place for the ARE */
+									opcA(cop); /* set teh ARE */
 					
-					/* add the field's number to the list */
-					if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
-						if ((tmp = addnext(wordnode, cop)) == NULL){
-							freeall(line, args, cop, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
+									/* add the field's number to the list */
+									if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
+										if ((tmp = addnext(wordnode, cop)) == NULL){
+											freeall(line, args, cop, NULL);
+											freeLblList(enthead);
+											freeLblList(exthead);
+											freeMemList(head);
+											freeLblList(headOfLbl);
+											fclose(source);
+											report(ERR_MEM, ln);
+											return ERR_MEM;
+									}
 
-						wordnode = tmp; /* move to the new node */
-						ic++; /* count the added node */
-					}
+									wordnode = tmp; /* move to the new node */
+									ic++; /* count the added node */
+								}
 					
-					twoParams++;
-					}
-					else 
-					if(adrParam1 == AC1){
-						/* get the kind of label (if exists) */
-						if((kind = getkindLbl(headOfLbl, params[0])) == NOTFOUND){
-							freeall(line, args, NULL);
-							report(status = ERR_ARGS_LBL, ln);
-							Two_Par_stat = 1;
-							break; /* move to the next line */
-						}
-						cop = getcontentLbl(headOfLbl, params[0]); /* get the labels address */
+								twoParams++;
+							}
+							else 
+							if(adrParam1 == AC1){
+							/* get the kind of label (if exists) */
+								if((kind = getkindLbl(headOfLbl, params[0])) == NOTFOUND){
+									freeall(line, args, NULL);
+									report(status = ERR_ARGS_LBL, ln);
+									Two_Par_stat = 1;
+									break; /* move to the next line */
+								}
+								cop = getcontentLbl(headOfLbl, params[0]); /* get the labels address */
 
 
-					/* check if the label is external */
-					if(kind == GEXT){
-						char *strIC; /* the place where the reference to the external label is */
-						
-						opcE(cop); /* set the ARE */
-						
-						/* cast the position to binary */
-						if((strIC = itostr(MEM_STRT + ic)) == NULL){
-							freeall(line, args, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;	
-						}
-						
-						/* add the label and position to the reference list */
-						if ((extTemp=addnextlbl(extNode, params[0], strIC,kind)) == NULL){ /* check if added to the list */
-							freeall(line, args, strIC, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
-                        			extNode=extTemp;
-						free(strIC);
-					} else {
-						opcR(cop); /* set the ARE */
-						
-					}
-					
-					/* add label to the list */
-					if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
-						if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
-							freeall(line, args, NULL);
-							freeLblList(enthead);
-							freeLblList(exthead);
-							freeMemList(head);
-							freeLblList(headOfLbl);
-							fclose(source);
-							report(ERR_MEM, ln);
-							return ERR_MEM;
-						}
+								/* check if the label is external */
+								if(kind == GEXT){
+									char *strIC; /* the place where the reference to the external label is */
 
-						wordnode = tmp; /* change to the next node */
-						ic++; /* count the added node */
-					}
-					
-					twoParams++;
-					
-				}
+									opcE(cop); /* set the ARE */
+
+									/* cast the position to binary */
+									if((strIC = itostr(MEM_STRT + ic)) == NULL){
+										freeall(line, args, NULL);
+										freeLblList(enthead);
+										freeLblList(exthead);
+										freeMemList(head);
+										freeLblList(headOfLbl);
+										fclose(source);
+										report(ERR_MEM, ln);
+										return ERR_MEM;	
+									}
+
+									/* add the label and position to the reference list */
+									if ((extTemp = addnextlbl(extNode, params[0], strIC,kind)) == NULL){ /* check if added to the list */
+										freeall(line, args, strIC, NULL);
+										freeLblList(enthead);
+										freeLblList(exthead);
+										freeMemList(head);
+										freeLblList(headOfLbl);
+										fclose(source);
+										report(ERR_MEM, ln);
+										return ERR_MEM;
+									}
+									extNode = extTemp; /* point to the new node */
+									free(strIC);
+								} else {
+									opcR(cop); /* set the ARE */
+
+								}
+
+								/* add label to the list */
+								if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
+									if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
+										freeall(line, args, NULL);
+										freeLblList(enthead);
+										freeLblList(exthead);
+										freeMemList(head);
+										freeLblList(headOfLbl);
+										fclose(source);
+										report(ERR_MEM, ln);
+										return ERR_MEM;
+									}
+
+									wordnode = tmp; /* change to the next node */
+									ic++; /* count the added node */
+								}
+
+								twoParams++;
+
+							}
 					else 
 					{ 
 					/*adrParam1 == AC3*/
