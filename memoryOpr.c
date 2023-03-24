@@ -68,19 +68,18 @@ lblword *addnextlbl(lblword *curr, char *name, char *data, int newKind){
 char *getcontentLbl(lblword *head, char *nameOflbl){
 	
 	lblword *ptr = head; /* pointer to scan the linked list */
-		char *copy;
+	char *copy; /* to return a copy of ptr->data */
 	
 	/* scan the list untill ptr is NULL or untill a node with the same name is found */
 	for (ptr = ptr->next ; ptr != NULL && strcmp(ptr->name, nameOflbl);ptr = ptr->next);
-	
-	/* return NULL if the node wasn't found. otherwise, return the content */
-
-	if(ptr==NULL)
-	return NULL;
+		
+	if(ptr == NULL) /* return NULL if the node wasn't found.*/
+		return NULL;
 	copy = malloc((strlen(ptr->data) + 1) * sizeof(char)); /* allocate space for the new string */
-	copy = duplstr(ptr->data);
-	copy[strlen(ptr->data)-1] = EOS;
-	return copy;
+	copy = duplstr(ptr->data); /* copy ptr->data to the new string */
+	copy[strlen(ptr->data)-1] = EOS; /* put '\0' at the end of the string */
+	return copy; 	 /* return the content */
+
 }
 
 
@@ -134,35 +133,33 @@ void freeLblList(lblword * head){
 
 int printMemList(FILE *fp, word *head, int num1, int num2){
 	int memc = MEM_STRT; /* memory counter */
-	char adrStr[4]; /* the string of the address*/
+	char adrStr[LEN_ADR]; /* the string of the address*/
 	
 	/* write to the file coded numbers */
 	fprintf(fp,"\t\t%d\t%d",num1,num2);
 	
 	/* scan the list */
 	while (head != NULL) {
-		char *adrs2, *data2; /* the data needed to be printed */
+		char *adrs, *data2; /* the data needed to be printed */
 		sprintf(adrStr,"%d",memc++);
 		
-		/* convert to special base 2 */
-		if ((adrs2 = addstr("0",adrStr)) == NULL){
-
+		if ((adrs = addstr("0",adrStr)) == NULL){ /* save the current adrs */
 			return ERR_MEM;
 		}
 
 		/* convert the data of the current node to special base 2 */
 		if ((data2 = convert2(head->data)) == NULL){
-			free(adrs2);
+			free(adrs);
 			return ERR_MEM;
 		}
 		/* print to the given file */
 		writeline(fp, ESTR);
-		if (write2str(fp, adrs2, data2) < 0){
-			freeall(adrs2, data2, NULL);
+		if (write2str(fp, adrs, data2) < 0){
+			freeall(adrs, data2, NULL);
 			return ERR_PRINT;
 		}
 		
-		freeall(adrs2, NULL);
+		freeall(adrs, NULL);
 		
 		head = head->next; /* continue to the next node */
 	}
@@ -177,10 +174,10 @@ int printLblList(FILE *fp, lblword * head){
 	/* scan the list */
 
 	while (head != NULL) {
-      		char code[4];
-     		code[3]= EOS; /* put NULL at the end of the array */
+      		char adr[LEN_ADR]; /* an array to save the address of the lable */
+     		adr[LEN_ADR - 1] = EOS; /* put NULL at the end of the array */
      
-		sprintf(code,"%d",binary_to_decimal(head->data)); /* the data needed to be printed */
+		sprintf(adr,"%d",binary_to_decimal(head->data)); /* the data needed to be printed */
 			   
 		/* if it's not the first line, separate the new line from the previous one */
 		if (firstline){
@@ -189,8 +186,8 @@ int printLblList(FILE *fp, lblword * head){
 			writeline(fp, ESTR); /* separate the lines */
 		}
 		
-		/* print the numbers to the given file */
-		if(write2str(fp, head->name, code) < 0){
+		/* print the data(name and address) to the given file */
+		if(write2str(fp, head->name, adr) < 0){
 			return ERR_PRINT;
 		}
 
