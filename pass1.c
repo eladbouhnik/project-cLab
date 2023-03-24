@@ -547,7 +547,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	*memhead = memnode;
 	
 	return status;
-	}
+}
 	
 	
 
