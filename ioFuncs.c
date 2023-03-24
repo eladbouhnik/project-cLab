@@ -49,7 +49,8 @@ char *readline(FILE *fp, char *lc, int *lenline){
 	if (lenline != NULL){
 		*lenline = len;
 	}
-			trimEnd(head);
+	trimEnd(head);  /* remove all the whitespace characters from the end of the string */
+	
 	return head;
 }
 
