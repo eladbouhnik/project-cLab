@@ -26,5 +26,5 @@ int addMcr(newMacro *head,char *newName,char *newContent);
 	if couldn't find anything, return NULL.		*/
 char *getcontent(newMacro *head, char *nameOfMacro);
  
-/* free the memory held by the given list(linked list of macro). */
+/* free the memory held by the given list(linked list of macros). */
 void freeList(newMacro *head);
