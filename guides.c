@@ -3,13 +3,13 @@
 #include <string.h>
 
 guide *findguide(char *str){
-	int low = 0, high = NUM_OF_GUIDES - 1;  /*the limits of the array */
+	int low = 0, high = NUM_OF_GUIDES - 1;  /* the limits of the array */
 	guide *gd = NULL; /* the guide with the same name */
 	int i;
-	char lc;  /*the character after the first field in the line (EOS or BLK) */
+	char lc;  /* the character after the first field in the line (EOS or BLK) */
 	
 	for (i = 0; str[i] != BLK && str[i] != EOS; i++); /* scan for the first character after the first field */
-	/*replace the character with EOS */
+	/* replace the character with EOS */
 		lc = str[i];
 		str[i] = EOS;
 	
