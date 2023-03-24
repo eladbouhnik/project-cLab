@@ -561,7 +561,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						ic++; /* count the added node */
 					}
 
-						while(twoParams != TWO_ARGS && !Two_Par_sta ){ /* as long as we have not reached two parameters and there are no errors */
+						while(twoParams != TWOARGS && !Two_Par_stat ){ /* as long as we have not reached two parameters and there are no errors */
                    		       		        if(twoParams == 0){
 						                if(adrParam1 == AC0){
 								/* convert to string the field's number */
@@ -1095,7 +1095,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 			wordnode = wordnode->next;
 		}
 		if(Two_Par_stat == 0) /* if we haven't freed them yet */
-		freeall(line, args,params, NULL);
+		freeall(line, args, NULL);
 	} /* end of while (scan the source file) */
 	
 	freeLblList(headOfLbl);
