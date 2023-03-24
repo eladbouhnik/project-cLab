@@ -19,14 +19,14 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 	char plc; /* the last character of the previous line */ 
 	FILE *source; /* the source file */
 	lblword *lblTemp, *lblNode; /* temp lblword for "addnextlbl" */
-	lblword *ptr;
+	lblword *ptr; /* a pointer to point the head of the labels linked list */
 		
 	word *datahead, *memnode = NULL, *datanode = NULL; /* lists for the operations and data memory words */
 	*memhead = (memnode = addnext(NULL, NULL)); /* create dummy head */
 	datahead = (datanode = addnext(NULL, NULL)); /* create dummy head */
 	
 	*headOfLbl = (lblNode = addnextlbl(NULL,"head", "null", DEFK)); /* table of labels - creating head*/
-	ptr=*headOfLbl;
+	ptr = *headOfLbl; /* point the head of the labels linked list */
 	fullName = addstr(nameOfFile, EAM); /* the name of the source file */
 	
 	/* check allocations */
@@ -177,8 +177,8 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				freeall(lbl, strDC, NULL); /* free the label and then address */
 				lblNode = lblTemp;  /* change to the new node */
 			}
-			/* check what guide it is- string or data*/
-			/* convert the data to binary format */
+			/* check what guide it is- string or data and
+			   convert the data to binary format     */
 			for (i = 0; i < lenargs; i++){
 				word *temp; /* temp word for "addnext" */
 				
@@ -232,8 +232,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				} else if (op->deftype == STRTYP){ /* check if the operand should be a string */
 					char *ptr; /* pointer to scan the string */
 					/* check if the first character is QUM */
-					
-
+				
 					if (*args[i] != QUM){
 						report(status = ERR_OPD, ln);
 						continue;  /* continue to the next line */
@@ -274,7 +273,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 
 						free(biop);
 
-						datanode = temp; /* change to the new node */
+						datanode = temp; /* point to the new node */
 						DC++;
 						
 						/*	the string has QUM at the end so when we reach it, we replace it with EOS
@@ -356,7 +355,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 					report(ERR_MEM, ln);
 					return ERR_MEM;
 				}
-				lblNode = lblTemp;
+				lblNode = lblTemp; /* point to the new node */
 			}
 		} else { /* instruction */
 			instruct *op = (instruct*)opr; /* cast opr to (instruct *) */
@@ -397,7 +396,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 					return ERR_MEM;
 				}
 											
-				movel2(adrs); /* move the binary 2 ccharacters to the left */
+				movel2(adrs); /* move the binary 2 characters to the left */
 				opcA(adrs); /* set the ARE of the address */
 
 				/* add the label to the table */
@@ -412,7 +411,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				}
 
 				freeall(lbl, adrs, NULL); /* free the label and address*/
-				lblNode = lblTemp;
+				lblNode = lblTemp; /* point to the new node */
 				
 			}
 			
@@ -429,7 +428,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				report(ERR_MEM, ln);
 				return ERR_MEM;
 			}
-			strcpy(opword,DEFADR);
+			strcpy(opword,DEFADR); /* copy the default address("00000000000000") to opword */
 
 			opcA(opword);  /*set the ARE of the operation word */
 
@@ -452,7 +451,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 			
 			free(opword);
 			
-			memnode = temp; /* change to the new node */
+			memnode = temp; /* point to the new node */
 			IC++; /* count the added node */
 			
 			/* check the addressing of the operands */
@@ -477,13 +476,13 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 			if (fadr3 == AC3 && lenargs == TWOARGS){ /* if both operands are registers (and there are two operands) - only one word added */
 				IC++;
 			} else {
-				IC += lenargs; /* there is atleast one additional word for each operand */
+				IC += lenargs; /* there is at least one additional word for each operand */
 				
 				/* check if each operand is from address method 2 */
 				for (i = 0; i < lenargs; i++){
-					if (adr[i] == AC2)  /* more three words for address method 2*/
+					if (adr[i] == AC2)  /* more two words for address method 2 (two parameters) */
 						IC+=2;
-					if(adr[i] == 	TWO_REG_PARAM) /* address method two with two registers as parameters*/
+					if(adr[i] == TWO_REG_PARAM) /* operand of address method two with two registers as parameters*/
 						IC++;
 				}
 			}
@@ -506,7 +505,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 		report(status = ERR_FULL_MEM, ln);
 	}
 	
-	/* scan the table for labels of GALL to fix their addresses (currently has only the position in the data list) */
+	/* scan the table(linked list) of labels of GALL to fix their addresses (currently has only the position in the data list) */
 	
 	
 		/* check if there is a list in this cell */
@@ -521,7 +520,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status){
 				
 				/* write the fixed position to the address */
 				for(j = 0; j < ADRLEN; j++) {
-					/* write the j-th bit of newadr to the j-th bit of ptr->content */
+					/* write the j-th bit of newadr to the j-th bit of ptr->data */
 					gbw(ptr->data, j + ADRSTRT) = getbit(newadr, j) + '0';
 				}
 			}
