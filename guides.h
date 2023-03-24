@@ -11,10 +11,9 @@
 
 
 /* constants for the guides */
-#define GNUMOP 2 /* the maximum number of operands for guide (when the guide can't have infite number of operands) */
+#define GNUMOP 2 /* the maximum number of operands for guide (when the guide can't have infinite number of operands) */
 #define GNM -1 /* no maximum number of operands */
 
-#define GNDEF 0 /* the guide doesn't have a default type for all the operands or the array isn't used*/
 #define STRTYP 1 /* The operand is string. */
 #define INTTYP 2 /* The operand is integer. */
 #define LBLTYP 3 /* The operand is label. */
@@ -32,8 +31,7 @@ typedef struct {
 	int opmin; /* the minimum number of operands */
 	int opmax; /* the maximum number of operands - GNM for no maximum*/
 	int kind; /* what kind of guide is it (data allocator or label declaration) */
-	int deftype; /* if all the operands have the same type set this to the typeo (STRTYP or INTTYP), overwise it should be GNDEF */
-	int optypes[GNUMOP]; /* an array to specify the types of the operands when "deftypes" is GNDEF (and there are two operands at most) */
+	int deftype; /* if all the operands have the same type set this to the type of STRTYP or INTTYP */
 } guide;
 
 
