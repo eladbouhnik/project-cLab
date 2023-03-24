@@ -312,29 +312,29 @@ char *itostr(int num){
 
 int isAdr2(char *str){
 	char *ptr = str;
-        int count = 0;
-        while (*ptr != EOS && *ptr != OPEN_BRAC){ 
+        int count = 0; /* reset count to 0 */
+        while (*ptr != EOS && *ptr != OPEN_BRAC){  /* while the character at ptr is not the end of string character or open brackts */
 		count++;
-        	ptr++;
+        	ptr++; /* move ptr to the next character */
 	}
-	if(count == 0 || (*ptr == EOS && *ptr != OPEN_BRAC))
+	if(count == 0 || (*ptr == EOS)) /* illegal structure of addressing method 2 */
 		return 0;
-	ptr++;
-	count = 0;
-	while (*ptr != EOS && *ptr != COM){
+	ptr++; /* move ptr to the next character */
+	count = 0; /* reset count to 0 */
+	while (*ptr != EOS && *ptr != COM){ /* while the character at ptr is not the end of string character or comma */
 		count++;
-		ptr++;
+		ptr++; /* move ptr to the next character */
 	}
-		if(count == 0 || (*ptr == EOS && *ptr != COM))
+		if(count == 0 || (*ptr == EOS)) /* illegal structure of addressing method 2 */
 		     return 0;
-		 ptr++;
-		 count = 0;   
+		 ptr++; /* move ptr to the next character */
+		 count = 0;   /* reset count to 0 */
 		 
 		 while (*ptr != EOS && *ptr != CLOSE_BRAC){
 		 	count++;
-		   	ptr++;
+		   	ptr++; /* move ptr to the next character */
 		 }
-		 if(count == 0 || (*ptr == EOS && *ptr != CLOSE_BRAC))
+		 if(count == 0 || (*ptr == EOS )) /* illegal structure of addressing method 2 */
 		 	return 0;
 		 return 1;
   }
