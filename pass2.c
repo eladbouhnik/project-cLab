@@ -222,8 +222,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				adrtg = findadr(args[i++]);
 				if(findadr(fstArg) == AC2|| findadr(fstArg) == TWO_REG_PARAM){ /* if the oprand is from addressing method 2*/
 					params = getParams(fstArg); /* get the parameters */
-					adrParam1 = findadr(params[0]); /* save the addressing method of the first parameter */
-			 	    	adrParam2 = findadr(params[1]); /* save the addressing method of the second parameter */
+					adrParam1 = findadr(fstPar); /* save the addressing method of the first parameter */
+			 	    	adrParam2 = findadr(secPar); /* save the addressing method of the second parameter */
 			 	   	if(adrtg == TWO_REG_PARAM)
 			 	    		adrtg = AC2;
 				  }
@@ -601,13 +601,13 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							else 
 							if(adrParam1 == AC1){
 							/* get the kind of label (if exists) */
-								if((kind = getkindLbl(headOfLbl, params[0])) == NOTFOUND){
+								if((kind = getkindLbl(headOfLbl, fstPar)) == NOTFOUND){
 									freeall(line, args, NULL);
 									report(status = ERR_ARGS_LBL, ln);
 									Two_Par_stat = 1; /* change status of parameters */
 									break; /* move to the next line */
 								}
-								cop = getcontentLbl(headOfLbl, params[0]); /* get the labels address */
+								cop = getcontentLbl(headOfLbl, fstPar); /* get the labels address */
 
 
 								/* check if the label is external */
@@ -629,7 +629,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 									}
 
 									/* add the label and position to the reference list */
-									if ((extTemp = addnextlbl(extNode, params[0], strIC,kind)) == NULL){ /* check if added to the list */
+									if ((extTemp = addnextlbl(extNode, fstPar, strIC,kind)) == NULL){ /* check if added to the list */
 										freeall(line, args, strIC, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
@@ -670,7 +670,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 								{ 
 									/*adrParam1 == AC3*/
 									cop = (char *)malloc((WORDSIZE + 1) * sizeof(char)); /* allocate new memory for the operand */
-									reg = atoi(params[0] + 1); /* get the register's number */
+									reg = atoi(fstPar + 1); /* get the register's number */
 
 									/* check the memory allocate */
 									if (cop == NULL){ 
@@ -716,9 +716,9 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 									}
 								}
 			else{
-			    if(adrParam2== AC0){
+			    if(adrParam2 == AC0){
 						/* convert to string the number */
-						if ((cop = itostr(atoi(params[1] + 1))) == NULL){
+						if ((cop = itostr(atoi(secPar + 1))) == NULL){
 							freeall(line, args, NULL);
 							freeLblList(enthead);
 							freeLblList(exthead);
@@ -754,13 +754,13 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						else 
 						if(adrParam2 == AC1){
 							/* get the kind of label (if exists) */
-							if((kind = getkindLbl(headOfLbl, params[1])) == NOTFOUND){
+							if((kind = getkindLbl(headOfLbl, secPar)) == NOTFOUND){
 								freeall(line, args, NULL);
 								report(status = ERR_ARGS_LBL, ln);
 								Two_Par_stat = 1; /* change status of parameters */
 								break; /* move to the next line */
 							}
-							cop = getcontentLbl(headOfLbl, params[1]); /* get the labels address */
+							cop = getcontentLbl(headOfLbl, secPar); /* get the labels address */
 
 						/* check if the label is external */
 						if(kind == GEXT){
@@ -781,7 +781,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							}
 
 							/* add the label and position to the reference list */
-							if ((extTemp = addnextlbl(extNode, params[1], strIC,kind)) == NULL){ /* check if added to the list */
+							if ((extTemp = addnextlbl(extNode, secPar, strIC,kind)) == NULL){ /* check if added to the list */
 								freeall(line, args, strIC, NULL);
 								freeLblList(enthead);
 								freeLblList(exthead);
@@ -823,7 +823,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					else 
 					{ /*adrParam2 == AC3*/
 					cop = (char *)malloc((WORDSIZE + 1) * sizeof(char)); /* allocate new memory for the operand */
-					reg = atoi(params[1] + 1); /* get the register's number */
+					reg = atoi(secPar + 1); /* get the register's number */
 					
 					/* check the memory allocate */
 					if (cop == NULL){ 
