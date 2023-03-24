@@ -31,7 +31,7 @@ typedef struct {
 	int opmin; /* the minimum number of operands */
 	int opmax; /* the maximum number of operands - GNM for no maximum*/
 	int kind; /* what kind of guide is it (data allocator or label declaration) */
-	int deftype; /* if all the operands have the same type set this to the type of STRTYP or INTTYP */
+	int deftype; /* the type of the guide */
 } guide;
 
 
