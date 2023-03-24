@@ -21,7 +21,7 @@
 #define EOS '\0'	/* end of string */
 #define BLK ' '		/* blank - separate fields */
 #define TAB '\t'	/* tab - separate fields */
-#define COM ','		/* coma - separate operands */
+#define COM ','		/* comma - separate operands */
 #define DOT '.'		/* dot - the prefix of a guide */
 #define HSH '#'		/* hashtag - the start of a number (as operand of instruction) */
 #define COL ':'		/* colon - the end of a label */
@@ -53,6 +53,6 @@ char *readline(FILE *fp, char *lc, int *len);
 	there may be NLN any where in the string and all of the
 	string will be written.
 	if the string is empty (has only the character EOS), the 
-	funtion does nothing.													*/
+	funtion does nothing.			*/
 int writeline(FILE *fp, char *str);
 
