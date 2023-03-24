@@ -24,8 +24,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 	word *wordnode = head; /* pointer to edit the word list */
 	lblword *enthead ; /* list for entry labels */
 	lblword *exthead ,*extTemp,*extNode; /* list for extern labels */
-	enthead = addnextlbl(NULL, NULL, NULL,0); /* create dummy head for the list */
-	exthead =(extNode = addnextlbl(NULL, NULL, NULL,0)); /* create dummy head for the list */
+	enthead = addnextlbl(NULL, NULL, NULL,DEFK); /* create dummy head for the list */
+	exthead =(extNode = addnextlbl(NULL, NULL, NULL,DEFK)); /* create dummy head for the list */
 
 	/* check if the lists were created */
 	if (enthead == NULL || exthead == NULL){
@@ -220,8 +220,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 				adrsc = findadr(args[i++]);
 			case ONEARGS: /* there is one arguments - which is the target */
 				adrtg = findadr(args[i++]);
-				if(findadr(args[0]) == AC2|| findadr(args[0]) == TWO_REG_PARAM){ /* if the oprand is from addressing method 2*/
-					params = getParams(args[0]); /* get the parameters */
+				if(findadr(fstArg) == AC2|| findadr(fstArg) == TWO_REG_PARAM){ /* if the oprand is from addressing method 2*/
+					params = getParams(fstArg); /* get the parameters */
 					adrParam1 = findadr(params[0]); /* save the addressing method of the first parameter */
 			 	    	adrParam2 = findadr(params[1]); /* save the addressing method of the second parameter */
 			 	   	if(adrtg == TWO_REG_PARAM)
