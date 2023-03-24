@@ -1,7 +1,7 @@
 #include "guides.h"
 #include "instruction.h"
 
-
+/* array of the guides (guide is defined in guides.h) */
 guide guids[] =	{
 					{"data"	, 1 , GNM , GALL , INTTYP , {GNDEF , GNDEF }},
 					{"entry" , 1 , 1 , GENT	 , LBLTYP , {GNDEF , GNDEF }},
@@ -9,7 +9,7 @@ guide guids[] =	{
 					{"string" , 1 , 1 , GALL , STRTYP , {GNDEF , GNDEF }}
 					
 		 };
-				
+/* array of the instructions (instruct is defined in instruction.h) */		
 instruct insts[] = {		
 					{"add" ,2, A0+A1+A3 , A1+A3 , AN,AN},
 					{"bne"	,10 , AN , A1+A2 , A0+A1+A3 ,A0+A1+A3},
@@ -31,6 +31,6 @@ instruct insts[] = {
 		    };
 					
 					
-		/* array of the registers' names */			
+/* array of the registers' names */			
 char *regs[] = {"r0","r1","r2","r3","r4","r5","r6","r7"};
 
