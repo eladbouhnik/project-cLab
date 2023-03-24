@@ -40,7 +40,7 @@ int preAsm(char *nameOfFile);
 		ERR_LBL
 		ERR_FULL_MEM
 		ERR_LMT_GUN
-		and the checks that "splitline" from "supfuncs.h" perform.
+		and the checks that "utils" from "utils.h" perform.
 	
 	and return the code of the error in case of error, return
 	SUCC otherwise (the status parameter is there to change the default from SUCC).
@@ -70,7 +70,7 @@ int pass1(char *nameOfFile, lblword **headOfLbl, word **memhead, int status);
 		ERR_ARGS_LBL
 		ERR_ENT_LBL
 		ERR_LMT_DAN
-		and the checks that "splitline" from "supfuncs.h" perform.
+		and the checks that "utils" from "utils.h" perform.
 	
 	if status is not SUCC or found an error the ENT, EXT and EOB files won't be created.
 	
