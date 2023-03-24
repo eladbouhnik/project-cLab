@@ -546,7 +546,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 					/* add label to the list */
 					if (wordnode != NULL){
-                    /* make sure it is on the operation word (it could be NULL if there was a previous error) */
+                   			 /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 						if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
 							freeall(line, args, NULL);
 							freeLblList(enthead);
@@ -561,9 +561,9 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						ic++; /* count the added node */
 					}
 
-					while(twoParams != 2 && status != 1){
-                   		       	if(twoParams == 0){
-						if(adrParam1== AC0){
+					while(twoParams != 2 && Two_Par_sta != 1){
+                   		       		if(twoParams == 0){
+							if(adrParam1== AC0){
 					/* convert to string the field's number */
 					if ((cop = itostr(atoi(params[0]+1))) == NULL){
 						freeall(line, args, NULL);
