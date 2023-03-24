@@ -502,7 +502,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 				/* get the kind of label (if exists) */
 				if((kind = getkindLbl(headOfLbl, tok)) == NOTFOUND){
-					freeall(line, args, NULL);
+					freeall(line, args,params, NULL);
 					report(status = ERR_ARGS_LBL, ln);
 					continue; /* move to the next line */
 				}
@@ -566,7 +566,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						                if(adrParam1 == AC0){
 								/* convert to string the field's number */
 									if ((cop = itostr(atoi(fstPar + 1))) == NULL){
-										freeall(line, args, NULL);
+										freeall(line, args,params, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
 										freeMemList(head);
@@ -582,7 +582,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 									/* add the field's number to the list */
 									if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 										if ((tmp = addnext(wordnode, cop)) == NULL){
-											freeall(line, args, cop, NULL);
+											freeall(line, args, cop,params, NULL);
 											freeLblList(enthead);
 											freeLblList(exthead);
 											freeMemList(head);
@@ -602,7 +602,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 							if(adrParam1 == AC1){
 							/* get the kind of label (if exists) */
 								if((kind = getkindLbl(headOfLbl, fstPar)) == NOTFOUND){
-									freeall(line, args, NULL);
+									freeall(line, args, params, NULL);
 									report(status = ERR_ARGS_LBL, ln);
 									Two_Par_stat = 1; /* change status of parameters */
 									break; /* move to the next line */
@@ -630,7 +630,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 									/* add the label and position to the reference list */
 									if ((extTemp = addnextlbl(extNode, fstPar, strIC,kind)) == NULL){ /* check if added to the list */
-										freeall(line, args, strIC, NULL);
+										freeall(line, args, strIC,params, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
 										freeMemList(head);
@@ -649,7 +649,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 								/* add label to the list */
 								if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 									if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
-										freeall(line, args, NULL);
+										freeall(line, args,params, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
 										freeMemList(head);
@@ -674,7 +674,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 									/* check the memory allocate */
 									if (cop == NULL){ 
-										freeall(line, args, NULL);
+										freeall(line, args,params, NULL);
 										freeLblList(enthead);
 										freeLblList(exthead);
 										freeMemList(head);
@@ -699,7 +699,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 									/* add the word to the list */
 									if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 										if ((tmp = addnext(wordnode, cop)) == NULL){
-											freeall(line, args, cop, NULL);
+											freeall(line, args, cop,params, NULL);
 											freeLblList(enthead);
 											freeLblList(exthead);
 											freeMemList(head);
@@ -719,7 +719,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 			    if(adrParam2 == AC0){
 						/* convert to string the number */
 						if ((cop = itostr(atoi(secPar + 1))) == NULL){
-							freeall(line, args, NULL);
+							freeall(line, args,params, NULL);
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
@@ -735,7 +735,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						/* add the field's number to the list */
 						if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 							if ((tmp = addnext(wordnode, cop)) == NULL){
-								freeall(line, args, cop, NULL);
+								freeall(line, args, cop,params, NULL);
 								freeLblList(enthead);
 								freeLblList(exthead);
 								freeMemList(head);
@@ -755,7 +755,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						if(adrParam2 == AC1){
 							/* get the kind of label (if exists) */
 							if((kind = getkindLbl(headOfLbl, secPar)) == NOTFOUND){
-								freeall(line, args, NULL);
+								freeall(line, args,params, NULL);
 								report(status = ERR_ARGS_LBL, ln);
 								Two_Par_stat = 1; /* change status of parameters */
 								break; /* move to the next line */
@@ -770,7 +770,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 							/* cast the position to binary */
 							if((strIC = itostr(MEM_STRT + ic)) == NULL){
-								freeall(line, args, NULL);
+								freeall(line, args,params, NULL);
 								freeLblList(enthead);
 								freeLblList(exthead);
 								freeMemList(head);
@@ -782,7 +782,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 
 							/* add the label and position to the reference list */
 							if ((extTemp = addnextlbl(extNode, secPar, strIC,kind)) == NULL){ /* check if added to the list */
-								freeall(line, args, strIC, NULL);
+								freeall(line, args, strIC,params, NULL);
 								freeLblList(enthead);
 								freeLblList(exthead);
 								freeMemList(head);
@@ -801,7 +801,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 						/* add label to the list */
 						if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 							if ((tmp = addnext(wordnode, cop)) == NULL){ /* check if added to the list */
-								freeall(line, args, NULL);
+								freeall(line, args,params, NULL);
 								freeLblList(enthead);
 								freeLblList(exthead);
 								freeMemList(head);
@@ -827,7 +827,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					
 					/* check the memory allocate */
 					if (cop == NULL){ 
-						freeall(line, args, NULL);
+						freeall(line, args,params, NULL);
 						freeLblList(enthead);
 						freeLblList(exthead);
 						freeMemList(head);
@@ -852,7 +852,7 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					/* add the word to the list */
 					if (wordnode != NULL){ /* make sure it is on the operation word (it could be NULL if there was a previous error) */
 						if ((tmp = addnext(wordnode, cop)) == NULL){
-							freeall(line, args, cop, NULL);
+							freeall(line, args, cop, params,NULL);
 							freeLblList(enthead);
 							freeLblList(exthead);
 							freeMemList(head);
@@ -869,15 +869,10 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 					twoParams++;
 					}
                     
-                    
-                    
-                    
-                    
                 	}
                 }
                 free(cop);
-                
-
+              
 				break;
 				case AC3: /* the operand is a register */
 
@@ -1099,8 +1094,8 @@ int pass2(char *nameOfFile, int status, lblword *headOfLbl, word *head){
 		if (wordnode != NULL){ /* make sure it is on the operand word (it could be NULL if there was a previous error) */
 			wordnode = wordnode->next;
 		}
-		if(Two_Par_stat == 0)
-		freeall(line, args, NULL);
+		if(Two_Par_stat == 0) /* if we haven't freed them yet */
+		freeall(line, args,params, NULL);
 	} /* end of while (scan the source file) */
 	
 	freeLblList(headOfLbl);
