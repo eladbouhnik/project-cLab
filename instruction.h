@@ -16,14 +16,14 @@
 #define MINOPNUM -2048  /* the lowest signed integer that can be held in 12 bits: -2^11 */
 
 /*	count the number of operands the instruction ip can get and put the number in counter.
-	ip is a pointer to the instruct*/
+	ip is a pointer to the instruct */
 #define opcount(counter, ip)	{									\
 									counter = 0;			\
 									if (ip->opsc != AN) counter++;	\
 									if (ip->optg != AN) counter++;	\
 								}
 
-#define ITYP -1 /*flag to identify instruction*/
+#define ITYP -1 /* flag to identify instruction */
 
 #define ADSNUM 4 /* the number of addressing methods */
 
@@ -59,6 +59,7 @@ typedef struct {
 	assume they are sorted alphabetically by names.
 	return a pointer to the ones with matching names.
 	if couldn't find any, return NULL				*/
+
 instruct *findinst(char *str);
 
 extern instruct insts[];
