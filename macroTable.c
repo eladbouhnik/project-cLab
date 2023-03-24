@@ -31,9 +31,6 @@ int addMcr(newMacro *head,char *name,char *content){
 	return SUCC;
 }
 
-
-
-
 char *getcontent(newMacro *head, char *nameOfMacro){
 	
 	newMacro *ptr = head; /* pointer to scan the linked list */
@@ -77,7 +74,6 @@ char *ismacrodec(struct macro *head, char *str){
 	
 	/* the string has two fields and the first is "macro" */
 	
-	
 	/* check if there already is a macro with this name */
 	if (getcontent(head, name) != NULL){
 		return NULL;
@@ -89,12 +85,10 @@ char *ismacrodec(struct macro *head, char *str){
 		return NULL;
 	}
 	
-	
 	/* check if the name is a register */
 	if (isreg(name) != NULL){
 		return NULL;
 	}
-	
 	
 	/* check if the name is a name of a guide (with or without the prefix) */
 	
